@@ -1,0 +1,21 @@
+.example-fill-remaining-space {
+  /* This fills the remaining space, by using flexbox. 
+     Every toolbar row uses a flexbox row layout. */
+  flex: 1 1 auto;
+}
+
+.done {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  color: white;
+}
+
+.sidenav {
+  padding: 20px;
+}
+
+.container {
+  min-height: 100%;
+  width: 100%;
+}

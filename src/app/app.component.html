@@ -1,2 +1,25 @@
-<router-outlet>
-</router-outlet>
+<mat-toolbar color="primary">
+  <button mat-icon-button (click)="drawer.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <span class="example-fill-remaining-space"></span>
+  <span>Webcomix</span>
+
+  <span class="example-fill-remaining-space"></span>
+  <app-menu-login></app-menu-login>
+</mat-toolbar>
+<div fxflex fxLayout="column" fxLayoutGap="0.5%" fxLayoutAlign="center">
+  <mat-drawer-container fxflex="100" [hasBackdrop]="false">
+    <mat-drawer #drawer class="sidenav" [mode]="side">I'm a drawer</mat-drawer>
+    <mat-drawer-content>
+      <mat-card>
+        <p>teste</p>
+        <p>teste</p>
+        <p>teste</p>
+        <p>teste</p>
+        <p>teste</p>
+      </mat-card>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>

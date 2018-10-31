@@ -10,7 +10,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
 
 //Services
 import { BehaviorSubject } from 'rxjs';
-import { SidebarService } from './services/sidebar.service'
+import { FilterPipe } from './services/pipes/filter.pipe';
 
 //Authentication
 import { Ng2UiAuthModule } from 'ng2-ui-auth';
@@ -30,13 +30,13 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 //Material Design
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { 
-	MatToolbarModule, 
-	MatButtonModule,
-	MatIconModule,
-	MatMenuModule,
-	MatSidenavModule,
-	MatCardModule  } from '@angular/material';
-import { FlexLayoutModule } from '@angular/flex-layout';
+	MdcTopAppBarModule, 
+	MdcButtonModule,
+	MdcIconModule,
+	MdcMenuModule,
+	MdcDrawerModule,
+	MdcCardModule,
+	MdcListModule   } from '@angular-mdc/web';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -47,25 +47,27 @@ registerLocaleData(localePt, 'pt-BR');
     ComicComponent,
     PageNotFoundComponent,
     MenuSidebarComponent,
-    MenuLoginComponent
+    MenuLoginComponent,
+    FilterPipe,
   ],
   imports: [
-	Ng2UiAuthModule.forRoot(AuthConfig),
+    Ng2UiAuthModule.forRoot(AuthConfig),
     BrowserModule,
     DashboardModule,
     HttpClientModule,
     FormsModule,
   	AppRoutingModule,
-	ReactiveFormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatIconModule,
-    MatMenuModule,
-    MatSidenavModule,
-    MatCardModule,
-    FlexLayoutModule
+    MdcTopAppBarModule,
+    MdcButtonModule,
+    MdcIconModule,
+    MdcMenuModule,
+    MdcDrawerModule,
+    MdcCardModule,
+    MdcListModule
   ],
+  exports: [FilterPipe],
   providers: [
 	{ provide: LOCALE_ID, useValue: "pt-BR" },
 	{
@@ -79,8 +81,7 @@ registerLocaleData(localePt, 'pt-BR');
         multi: true
     },
 	AuthenticationGuard,
-	JwtHelperService,
-	SidebarService
+	JwtHelperService
   ],
   bootstrap: [AppComponent]
 })

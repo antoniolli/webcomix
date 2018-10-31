@@ -1,25 +1,35 @@
-<mat-toolbar color="primary">
-  <button mat-icon-button (click)="drawer.toggle()">
-    <mat-icon>menu</mat-icon>
-  </button>
-
-  <span class="example-fill-remaining-space"></span>
-  <span>Webcomix</span>
-
-  <span class="example-fill-remaining-space"></span>
-  <app-menu-login></app-menu-login>
-</mat-toolbar>
-<div fxflex fxLayout="column" fxLayoutGap="0.5%" fxLayoutAlign="center">
-  <mat-drawer-container fxflex="100" [hasBackdrop]="false">
-    <mat-drawer #drawer class="sidenav" [mode]="side">I'm a drawer</mat-drawer>
-    <mat-drawer-content>
-      <mat-card>
-        <p>teste</p>
-        <p>teste</p>
-        <p>teste</p>
-        <p>teste</p>
-        <p>teste</p>
-      </mat-card>
-    </mat-drawer-content>
-  </mat-drawer-container>
+<mdc-top-app-bar #demoappbar [short]="false" [dense]="on" [fixed]="off">
+	<mdc-top-app-bar-row>
+		<mdc-top-app-bar-section align="start">
+			<mdc-icon mdcTopAppBarNavIcon (click)="demoDismissible.open = !demoDismissible.open">menu</mdc-icon>
+		</mdc-top-app-bar-section>
+		<mdc-top-app-bar-section class="justify-center" align="center" (click)="test">
+			<mdc-icon class="text-click">menu</mdc-icon>
+			<h2 class="text-click">Webcomix</h2>
+		</mdc-top-app-bar-section>
+		<mdc-top-app-bar-section align="end">
+			<div mdcMenuSurfaceAnchor #demoanchor>
+				<mdc-icon mdcTopAppBarActionItem (click)="demomenu.open = !demomenu.open">account_circle</mdc-icon>
+				<mdc-menu #demomenu anchorCorner="bottomStart" class="justify-center">
+					<app-menu-login></app-menu-login>
+				</mdc-menu>
+			</div>
+		</mdc-top-app-bar-section>
+	</mdc-top-app-bar-row>
+</mdc-top-app-bar>
+<div class="mdc-top-app-bar--fixed-adjust">
+	<mdc-drawer drawer="modal" #demoDismissible>
+		<mdc-drawer-header title="Drawer Title" subtitle="Subtitle"></mdc-drawer-header>
+		<mdc-drawer-content>
+			<mdc-list useActivatedClass>
+				<mdc-list-item *ngFor="let item of destinations">
+					<mdc-icon mdcListItemGraphic *ngIf="item.icon">{{item.icon}}</mdc-icon>{{item.label}}
+				</mdc-list-item>
+			</mdc-list>
+		</mdc-drawer-content>
+	</mdc-drawer>
+	<div class="demo-drawer-app-content" mdcDrawerAppContent>
+		<router-outlet></router-outlet>
+	</div>
 </div>
+

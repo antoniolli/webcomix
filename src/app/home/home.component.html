@@ -1,3 +1,14 @@
-<p>
-  home works!
-</p>
+<div class="form-group mt-3">
+	<label for="slctCustomer" class="form-label form-label-sm">Pesquise seus clientes que terão acesso:</label>
+	<input id="slctCustomer" type="text" class="form-control form-control-sm" [(ngModel)]="searchText" />
+</div>
+<div class="mt-3">
+	<ul class="list-group">
+		<li class="list-group-item" *ngFor="let c of customers | filter : searchText" (click)="selectCustomer(c)">
+			{{c.name}}
+			<span class="edit">
+				<i class="fa fa-plus text-primary"></i>
+			</span>
+		</li>
+	</ul>
+</div>

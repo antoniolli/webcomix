@@ -1,3 +1,11 @@
+html, body {
+	height: 100vh;
+}
+
+.full-height {
+  height: 100%;
+}
+
 .example-fill-remaining-space {
   /* This fills the remaining space, by using flexbox. 
      Every toolbar row uses a flexbox row layout. */
@@ -18,4 +26,12 @@
 .container {
   min-height: 100%;
   width: 100%;
+}
+
+.justify-center{
+  justify-content: center;
+}
+
+.text-click{
+  cursor: pointer;
 }

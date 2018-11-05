@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-	baseUrl: 'http://localhost:9082/',
+	baseUrl: 'http://webcomix-api.herokuapp.com/',
 	production: false,
 	authTokenName: 'auth_token'
 };

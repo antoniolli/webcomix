@@ -11,6 +11,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
 //Services
 import { BehaviorSubject } from 'rxjs';
 import { FilterPipe } from './services/pipes/filter.pipe';
+import { ComicService } from './services/comic.service';
 
 //Authentication
 import { Ng2UiAuthModule } from 'ng2-ui-auth';
@@ -69,19 +70,20 @@ registerLocaleData(localePt, 'pt-BR');
   ],
   exports: [FilterPipe],
   providers: [
-	{ provide: LOCALE_ID, useValue: "pt-BR" },
-	{
-	    provide: JWT_TOKEN_NAME,
-	    useValue: new BehaviorSubject('auth_token')
+  	{ provide: LOCALE_ID, useValue: "pt-BR" },
+  	{
+  	    provide: JWT_TOKEN_NAME,
+  	    useValue: new BehaviorSubject('auth_token')
 
-	},
+  	},
     {
         provide: HTTP_INTERCEPTORS,
         useClass: TokenInterceptor,
         multi: true
     },
-	AuthenticationGuard,
-	JwtHelperService
+  	AuthenticationGuard,
+  	JwtHelperService,
+    ComicService
   ],
   bootstrap: [AppComponent]
 })

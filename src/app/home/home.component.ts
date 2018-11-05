@@ -1,15 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 
+// Services
+import { ComicService } from '../services/comic.service';
+
+// Models
+import { Comic } from '../models/comic';
+
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+	selector: 'app-home',
+	templateUrl: './home.component.html',
+	styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+	comicList: Array<Comic>
 
-  ngOnInit() {
-  }
+	constructor(private comicService: ComicService) { }
+
+	ngOnInit() {
+		this.comicService.getComics().subscribe(comics => {
+			this.comicList = comics;
+		})
+	}
 
 }

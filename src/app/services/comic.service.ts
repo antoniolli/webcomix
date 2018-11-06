@@ -15,7 +15,7 @@ import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
 
 //Models
-import { Comic } from "../models/comic";
+import { Comic } from '../models/comic'
 
 
 @Injectable({
@@ -27,7 +27,7 @@ export class ComicService {
 
     getComics(page?: number): Observable<Array<Comic>> {
         return this.http
-            .get(environment.baseUrl + "comics/" + (page || ""))
+            .get<Array<Comic>>(environment.baseUrl + "comics/" + (page || ""))
             .catch((error: any) => Observable.throw(error || "Server error"));
     }
 }

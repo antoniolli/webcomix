@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
 	ngOnInit() {
 		this.comicService.getComics().subscribe(comics => {
 			this.comicList = comics;
-		})
+		}, error => console.log(error))
 	}
 
 }

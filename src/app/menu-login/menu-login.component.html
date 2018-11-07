@@ -1,8 +1,8 @@
 <mdc-list *ngIf="!user">
-	<mdc-list-item (click)=>
+	<mdc-list-item (click)="goToAuthenticate()">
 		Log in
 	</mdc-list-item>
-	<mdc-list-item>
+	<mdc-list-item (click)="goToAuthenticate()">
 		Sign up
 	</mdc-list-item>
 </mdc-list>
@@ -14,3 +14,4 @@
 		Log out
 	</mdc-list-item>
 </mdc-list>
+

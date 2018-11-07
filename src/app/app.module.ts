@@ -1,3 +1,5 @@
+import { environment } from 'src/environments/environment';
+
 //Modules
 import localePt from '@angular/common/locales/pt';
 import { BrowserModule } from '@angular/platform-browser';
@@ -15,7 +17,6 @@ import { ComicService } from './services/comic.service';
 
 //Authentication
 import { Ng2UiAuthModule } from 'ng2-ui-auth';
-import { AuthConfig, JWT_TOKEN_NAME } from './auth.config';
 import { AuthenticationGuard } from './services/authentication.guard';
 import { JwtHelperService } from './services/jwt-helper.service';
 import { TokenInterceptor } from './services/token.interceptor';
@@ -27,6 +28,7 @@ import { MenuLoginComponent } from './menu-login/menu-login.component';
 import { HomeComponent } from './home/home.component';
 import { ComicComponent } from './comic/comic.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AuthenticateComponent } from './authenticate/authenticate.component';
 
 //Material Design
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -37,7 +39,13 @@ import {
 	MdcMenuModule,
 	MdcDrawerModule,
 	MdcCardModule,
-	MdcListModule   } from '@angular-mdc/web';
+  MdcListModule,
+  MdcImageListModule,
+  MdcRippleModule,
+  MdcFormFieldModule,
+  MdcTextFieldModule,
+  MdcTypographyModule,   } from '@angular-mdc/web';
+
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -50,9 +58,9 @@ registerLocaleData(localePt, 'pt-BR');
     MenuSidebarComponent,
     MenuLoginComponent,
     FilterPipe,
+    AuthenticateComponent,
   ],
   imports: [
-    Ng2UiAuthModule.forRoot(AuthConfig),
     BrowserModule,
     DashboardModule,
     HttpClientModule,
@@ -66,13 +74,18 @@ registerLocaleData(localePt, 'pt-BR');
     MdcMenuModule,
     MdcDrawerModule,
     MdcCardModule,
-    MdcListModule
+    MdcListModule,
+    MdcImageListModule,
+    MdcRippleModule,
+    MdcFormFieldModule,
+    MdcTextFieldModule,
+    MdcTypographyModule,
   ],
   exports: [FilterPipe],
   providers: [
   	{ provide: LOCALE_ID, useValue: "pt-BR" },
   	{
-  	    provide: JWT_TOKEN_NAME,
+  	    provide: environment.authTokenName,
   	    useValue: new BehaviorSubject('auth_token')
 
   	},

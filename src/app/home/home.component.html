@@ -2,13 +2,13 @@
 	<label for="slctCustomer" class="form-label form-label-sm">Pesquise seus clientes que terão acesso:</label>
 	<input id="slctCustomer" type="text" class="form-control form-control-sm" [(ngModel)]="searchText" />
 </div>
-<div class="mt-3">
-	<ul class="list-group">
-		<li class="list-group-item" *ngFor="let c of comicList | filter : searchText" (click)="selectCustomer(c)">
-			{{c.name}}
-			<span class="edit">
-				<i class="fa fa-plus text-primary"></i>
-			</span>
-		</li>
-	</ul>
-</div>
+<mdc-image-list #demolist class="standard-image-list">
+	<mdc-image-list-item *ngFor="let c of comicList" (click)="goToComic(c.id)">
+		<mdc-image-list-image-aspect>
+			<img mdcImageListImage [src]="c.cover_url != null ? c.cover_url : cover_sample" />
+		</mdc-image-list-image-aspect>
+		<mdc-image-list-supporting>
+			<span mdcImageListLabel>{{c.name}}</span>
+		</mdc-image-list-supporting>
+	</mdc-image-list-item>
+</mdc-image-list>

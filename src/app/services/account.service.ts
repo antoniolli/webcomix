@@ -12,17 +12,29 @@ import "rxjs/add/operator/map";
 import { environment } from "../../environments/environment";
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class AccountService {
     user: User = null;
 
-    constructor(private jwt: JwtHelperService, private http: HttpClient) {}
+    constructor(private jwt: JwtHelperService, private http: HttpClient) { }
+
+    login(loginForm: any) {
+        return this.http.post<any>(environment.baseUrl + '/auth/login', { email: loginForm.email, password: loginForm.password})
+            .map(user => {
+                // login successful if there's a jwt token in the response
+                if (user && user.auth_token) {
+                    // store user details and jwt token in local storage to keep user logged in between page refreshes
+                    localStorage.setItem('currentUser', JSON.stringify(user));
+                }
+ 
+                return user;
+            });
+    }
 
     getLocalUser() {
         return this.user;
     }
-
     /**
      * Determines whether user is authenticated
      * @returns true if authenticated

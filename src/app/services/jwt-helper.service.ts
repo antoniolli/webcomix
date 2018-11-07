@@ -1,14 +1,10 @@
 import { Injectable, Inject } from "@angular/core";
-import { JWT_TOKEN_NAME } from "../auth.config";
 import { BehaviorSubject } from "rxjs";
+import { environment } from "src/environments/environment";
 
 @Injectable()
 export class JwtHelperService {
-    tokenName: string;
-    constructor(
-        @Inject(JWT_TOKEN_NAME) private jwtToken: BehaviorSubject<string>
-    ) {
-        jwtToken.subscribe(name => (this.tokenName = name));
+    constructor() {
     }
 
     urlBase64Decode(str: string): string {
@@ -119,6 +115,6 @@ export class JwtHelperService {
     }
 
     tokenGetter(): string {
-        return localStorage.getItem(this.tokenName);
+        return localStorage.getItem(environment.authTokenName);
     }
 }

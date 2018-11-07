@@ -1,0 +1,25 @@
+@import "~@angular-mdc/theme/material";
+
+.standard-image-list {
+    @include mdc-image-list-aspect(1.5); // Images are 3:2
+    @include mdc-image-list-standard-columns(4);
+}
+
+mdc-image-list-item {
+    cursor: pointer;
+}
+
+.masonry-image-list {
+    @include mdc-image-list-masonry-columns(4);
+    
+}
+
+@media (max-width: 300px) {
+    .standard-image-list {
+        @include mdc-image-list-standard-columns(3);
+    }
+
+    .masonry-image-list {
+        @include mdc-image-list-masonry-columns(3);
+    }
+}

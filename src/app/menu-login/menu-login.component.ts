@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../models/user';
 import { AccountService } from '../services/account.service';
-import { AuthService } from 'ng2-ui-auth';
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,7 +12,7 @@ export class MenuLoginComponent implements OnInit {
 
   user: User;
 
-  constructor(private router: Router, private authService: AuthService, private accountService: AccountService) {
+  constructor(private router: Router, private accountService: AccountService) {
   }
 
   ngOnInit() {
@@ -21,8 +20,10 @@ export class MenuLoginComponent implements OnInit {
   }
 
   logout(): void {
-    this.authService.logout()
-        .subscribe(() => this.router.navigateByUrl('login'));
-}
 
+  }
+
+  goToAuthenticate() {
+    this.router.navigateByUrl('login')
+  }
 }

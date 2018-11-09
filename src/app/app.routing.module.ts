@@ -19,6 +19,7 @@ const appRoutes: Routes = [
     component: AuthenticateComponent,
     pathMatch: 'full'
   },
+  { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule', canActivate: [ AuthenticationGuard ] },
   
   { path: '**', component: PageNotFoundComponent }
 ];

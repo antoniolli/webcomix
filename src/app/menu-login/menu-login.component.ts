@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { User } from '../models/user';
 import { AccountService } from '../services/account.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-menu-login',
@@ -10,17 +10,21 @@ import { Router } from '@angular/router';
 })
 export class MenuLoginComponent implements OnInit {
 
-  user: User;
+  @Input() user: User;
 
-  constructor(private router: Router, private accountService: AccountService) {
+  constructor(
+    private router: Router,
+    private accountService: AccountService
+  ) {
   }
 
   ngOnInit() {
-    this.user = this.accountService.getLocalUser()
   }
 
   logout(): void {
-
+    this.accountService.logout()
+    this.router.navigateByUrl('')
+    this.user = null;
   }
 
   goToAuthenticate() {

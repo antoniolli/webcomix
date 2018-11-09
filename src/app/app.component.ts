@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AccountService } from './services/account.service';
+import { User } from './models/user';
 
 @Component({
   selector: 'app-root',
@@ -7,8 +10,16 @@ import { Component } from '@angular/core';
 })
 
 export class AppComponent {
+  user: User;
 
-  constructor(){}
+  constructor(
+    private router: Router,
+    private accountService: AccountService) {
+    this.user = this.accountService.getLocalUser()
+  }
 
+  goToHome() {
+    this.router.navigateByUrl('')
+  }
 
 }

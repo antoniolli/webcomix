@@ -15,25 +15,28 @@ import { environment } from "../../environments/environment";
     providedIn: 'root'
 })
 export class AccountService {
-    user: User = null;
-
     constructor(private jwt: JwtHelperService, private http: HttpClient) { }
 
     login(loginForm: any) {
         return this.http.post<any>(environment.baseUrl + '/auth/login', { email: loginForm.email, password: loginForm.password})
-            .map(user => {
+            .map(response => {
                 // login successful if there's a jwt token in the response
-                if (user && user.auth_token) {
+                if (response && response.auth_token && response.user) {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('currentUser', JSON.stringify(user));
+                    localStorage.setItem(environment.authTokenName, JSON.stringify(response.auth_token));
+                    localStorage.setItem('user', JSON.stringify(response.user));
                 }
  
-                return user;
+                return response;
             });
     }
 
+    logout() {
+        localStorage.clear()    
+    }
+
     getLocalUser() {
-        return this.user;
+        return JSON.parse(localStorage.getItem('user'));
     }
     /**
      * Determines whether user is authenticated
@@ -63,31 +66,9 @@ export class AccountService {
             });
     }
 
-    getUser(): Observable<User> {
-        return this.http
-            .get<User>(environment.baseUrl + "profile", {})
-            .do(response => {
-                this.user = <User>response;
-            })
-            .catch((error: any) => {
-                return Observable.throw(error || "Server error");
-            });
-    }
-
     persist(user: User): Observable<User> {
         return this.http
             .post<User>(environment.baseUrl + "profile/persist", user)
-            .catch((error: any) => {
-                return Observable.throw(error || "Server error");
-            });
-    }
-
-    checkAccess(accessCode: string, secret: string): Observable<User> {
-        return this.http
-            .post<User>(environment.baseUrl + "account/check-access", {
-                code: accessCode,
-                secret: secret
-            })
             .catch((error: any) => {
                 return Observable.throw(error || "Server error");
             });

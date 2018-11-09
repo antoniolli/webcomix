@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AccountService } from '../services/account.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-authenticate',
@@ -8,21 +9,32 @@ import { AccountService } from '../services/account.service';
   styleUrls: ['./authenticate.component.scss']
 })
 export class AuthenticateComponent implements OnInit {
-  demoForm = new FormGroup({
+  redirectUrl: string;
+  loginForm = new FormGroup({
     email: new FormControl(
       { value: '', disabled: false }, [Validators.required]),
     password: new FormControl(
       { value: '', disabled: false }, [Validators.required])
   });
 
-  constructor(private accountService: AccountService) { }
+  constructor(
+    private accountService: AccountService,
+    private route: ActivatedRoute,
+    private router: Router,
+    ) { }
 
   ngOnInit() {
+    this.route.queryParamMap
+      .subscribe(params => {
+        if (params.has('redirectTo')) {
+          this.redirectUrl = params.get('redirectTo');
+        }
+      });
   }
 
   submitLogInForm() {
-    this.accountService.login(this.demoForm.value).subscribe(user => {
-      let test = user;
+    this.accountService.login(this.loginForm.value).subscribe(user => {
+      this.router.navigateByUrl(this.redirectUrl)
     })
   }
 

@@ -3,15 +3,15 @@
 		<mdc-top-app-bar-section align="start">
 			<mdc-icon mdcTopAppBarNavIcon (click)="demoDismissible.open = !demoDismissible.open">menu</mdc-icon>
 		</mdc-top-app-bar-section>
-		<mdc-top-app-bar-section class="justify-center" align="center" (click)="test">
-			<mdc-icon class="text-click">menu</mdc-icon>
+		<mdc-top-app-bar-section class="justify-center" align="center" (click)="goToHome()">
 			<h2 class="text-click">Webcomix</h2>
 		</mdc-top-app-bar-section>
 		<mdc-top-app-bar-section align="end">
+			<span mdcSubtitle2 *ngIf="user">Bem vindo, {{user.name}}</span>
 			<div mdcMenuSurfaceAnchor #demoanchor>
 				<mdc-icon mdcTopAppBarActionItem (click)="demomenu.open = !demomenu.open">account_circle</mdc-icon>
 				<mdc-menu #demomenu anchorCorner="bottomStart" class="justify-center">
-					<app-menu-login></app-menu-login>
+					<app-menu-login [user]="user"></app-menu-login>
 				</mdc-menu>
 			</div>
 		</mdc-top-app-bar-section>
@@ -32,4 +32,3 @@
 		<router-outlet></router-outlet>
 	</div>
 </div>
-

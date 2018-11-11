@@ -9,29 +9,28 @@ import { PageManagerComponent } from './page-manager/page-manager.component';
 const dashboardRoutes: Routes = [
     {
         path: 'dashboard',
-        component: DashboardComponent,  
+        component: DashboardComponent,
         canActivate: [AuthenticationGuard],
         children: [
             {
-                path: 'comic',
+                path: 'comics',
                 component: ComicManagerComponent,
                 pathMatch: 'full'
             },
             {
-                path: 'comic/:id',
+                path: 'comics/:idComic',
                 component: ComicManagerComponent,
-                children: [
-                    {
-                        path: 'page',
-                        component: PageManagerComponent,
-                        pathMatch: 'full'
-                    },
-                    {
-                        path: 'page/:id',
-                        component: PageManagerComponent,
-                        pathMatch: 'full'
-                    },
-                ]
+
+            },
+            {
+                path: 'comics/:idComic/pages',
+                component: PageManagerComponent,
+                pathMatch: 'full'
+            },
+            {
+                path: 'comics/:idComic/pages/:idPage',
+                component: PageManagerComponent,
+                pathMatch: 'full'
             }
         ]
     }

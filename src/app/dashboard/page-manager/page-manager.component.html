@@ -1,33 +1,20 @@
 <mdc-card class="demo-card">
 
   <div class="demo-card__primary">
-    <h2 class="demo-card__title" mdcHeadline6>Criar nova comic</h2>
+    <h2 class="demo-card__title" mdcHeadline6>Criar nova página</h2>
   </div>
   <div class="demo-card__secondary" mdcBody2>
-    <form [formGroup]="comicForm" id="comicForm">
+    <form [formGroup]="pageForm" id="comicForm">
       <mdc-form-field>
-        <mdc-text-field formControlName="name" label="Nome da comic" outlined [helperText]="comicHelper" required
+        <mdc-text-field formControlName="title" label="Título da página" outlined [helperText]="titleHelper"
           minlength="3"></mdc-text-field>
-        <mdc-text-field-helper-text #comicHelper="mdcHelperText" validation>
-          <span *ngIf="comicForm.controls['name'].errors?.required">email is required</span>
-          <span *ngIf="comicForm.controls['name'].errors?.minlength">email is not long enough</span>
-        </mdc-text-field-helper-text>
-      </mdc-form-field>
-      <mdc-form-field>
-        <mdc-textarea type="description" formControlName="description" label="Descricao da comic" [helperText]="descriptionHelper"
-          rows="3" cols="16"></mdc-textarea>
-        <mdc-text-field-helper-text #descriptionHelper="mdcHelperText" validation>
-          <span *ngIf="comicForm.controls['description'].errors?.required">email is required</span>
-          <span *ngIf="comicForm.controls['description'].errors?.minlength">email is not long enough</span>
+        <mdc-text-field-helper-text #titleHelper="mdcHelperText" validation>
+          <span *ngIf="pageForm.controls['title']?.status == 'INVALID'">email is required</span>
         </mdc-text-field-helper-text>
       </mdc-form-field>
       <mdc-form-field>
         <mdc-switch formControlName="isPublic"></mdc-switch>
         <label>Tornar pública</label>
-      </mdc-form-field>
-      <mdc-form-field>
-        <mdc-switch formControlName="isCommentActive"></mdc-switch>
-        <label>Ativar comentários</label>
       </mdc-form-field>
       <mdc-form-field>
         <label class="image-upload-container btn btn-bwm">

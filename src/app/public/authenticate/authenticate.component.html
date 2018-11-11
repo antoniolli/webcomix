@@ -7,16 +7,14 @@
       <mdc-form-field>
         <mdc-text-field formControlName="email" label="E-mail" fullwidth [helperText]="userHelper" required minlength="3"></mdc-text-field>
         <mdc-text-field-helper-text #userHelper="mdcHelperText" validation>
-          <span *ngIf="loginForm.controls['email'].errors?.required">email is required</span>
-          <span *ngIf="loginForm.controls['email'].errors?.minlength">email is not long enough</span>
+          <span *ngIf="loginForm.controls['email']?.status == 'INVALID'">email is required</span>
         </mdc-text-field-helper-text>
       </mdc-form-field>
       <mdc-form-field>
         <mdc-text-field type="password" formControlName="password" label="Senha" fullwidth [helperText]="passwordHelper"
           required minlength="5"></mdc-text-field>
         <mdc-text-field-helper-text #passwordHelper="mdcHelperText" validation>
-          <span *ngIf="loginForm.controls['password'].errors?.required">email is required</span>
-          <span *ngIf="loginForm.controls['password'].errors?.minlength">email is not long enough</span>
+          <span *ngIf="loginForm.controls['password']?.status == 'INVALID'">email is required</span>
         </mdc-text-field-helper-text>
       </mdc-form-field>
     </form>
@@ -36,31 +34,27 @@
       <mdc-form-field>
         <mdc-text-field formControlName="name" label="Nome completo" fullwidth [helperText]="nameHelper" required minlength="3"></mdc-text-field>
         <mdc-text-field-helper-text #nameHelper="mdcHelperText" validation>
-          <span *ngIf="signUpForm.controls['name'].errors?.required">name is required</span>
-          <span *ngIf="signUpForm.controls['name'].errors?.minlength">name is not long enough</span>
+          <span *ngIf="signUpForm.controls['name']?.status == 'INVALID'">email is required</span>
         </mdc-text-field-helper-text>
       </mdc-form-field>
       <mdc-form-field>
-        <mdc-text-field formControlName="email" label="E-mail" fullwidth [helperText]="emailHelper" required minlength="3"></mdc-text-field>
+        <mdc-text-field formControlName="email" label="E-mail" fullwidth [helperText]="emailHelper" required></mdc-text-field>
         <mdc-text-field-helper-text #emailHelper="mdcHelperText" validation>
-          <span *ngIf="signUpForm.controls['email'].errors?.required">email is required</span>
-          <span *ngIf="signUpForm.controls['email'].errors?.minlength">email is not long enough</span>
+          <span *ngIf="signUpForm.controls['email']?.status == 'INVALID'">email is required</span>
         </mdc-text-field-helper-text>
       </mdc-form-field>
       <mdc-form-field>
         <mdc-text-field type="password" formControlName="password" label="Senha" fullwidth [helperText]="passwordHelper"
-          required minlength="5"></mdc-text-field>
+          required minlength="6"></mdc-text-field>
         <mdc-text-field-helper-text #passwordHelper="mdcHelperText" validation>
-          <span *ngIf="signUpForm.controls['password'].errors?.required">email is required</span>
-          <span *ngIf="signUpForm.controls['password'].errors?.minlength">email is not long enough</span>
+          <span *ngIf="signUpForm.controls['password']?.status == 'INVALID'">email is required</span>
         </mdc-text-field-helper-text>
       </mdc-form-field>
       <mdc-form-field>
         <mdc-text-field type="password" formControlName="passwordConfirmation" label="Confirmar senha" fullwidth
           [helperText]="passwordConfirmationHelper" required minlength="5"></mdc-text-field>
         <mdc-text-field-helper-text #passwordConfirmationHelper="mdcHelperText" validation>
-          <span *ngIf="signUpForm.controls['passwordConfirmation'].errors?.required">email is required</span>
-          <span *ngIf="signUpForm.controls['passwordConfirmation'].errors?.minlength">email is not long enough</span>
+          <span *ngIf="signUpForm.controls['passwordConfirmation']?.status == 'INVALID'">email is required</span>
         </mdc-text-field-helper-text>
       </mdc-form-field>
     </form>

@@ -5,7 +5,7 @@
 <mdc-image-list #demolist class="standard-image-list">
 	<mdc-image-list-item *ngFor="let c of comicList" (click)="goToComic(c.id)">
 		<mdc-image-list-image-aspect>
-			<img mdcImageListImage [src]="c.cover_url != null ? c.cover_url : cover_sample" />
+			<img mdcImageListImage [src]="c.url != '' ? c.url : cover_sample" />
 		</mdc-image-list-image-aspect>
 		<mdc-image-list-supporting>
 			<span mdcImageListLabel>{{c.name}}</span>

@@ -10,7 +10,7 @@ import { AuthenticateComponent } from './public/authenticate/authenticate.compon
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   {
-    path: 'comics/:id',
+    path: 'comics/:idComic',
     component: ComicComponent,
     pathMatch: 'full'
   },

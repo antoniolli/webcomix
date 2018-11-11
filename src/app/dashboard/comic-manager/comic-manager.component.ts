@@ -1,13 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ComicService } from 'src/app/services/comic.service';
-
-class ImageSnippet {
-  pending: boolean = false;
-  status: string = 'init';
-
-  constructor(public src: string, public file: File) { }
-}
+import { ImageSnippet } from '../../models/image-snippet';
 
 @Component({
   selector: 'app-comic-manager',

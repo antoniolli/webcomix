@@ -25,8 +25,8 @@ export class AuthenticateComponent implements OnInit {
     email: new FormControl(
       { value: '', disabled: false }, [Validators.required]),
     password: new FormControl(
-      { value: '', disabled: false }, [Validators.required]),
-    passwordConfirmation: new FormControl('', [Validators.required, Validators.minLength(6), LoginValidators.matchOtherValidator('password')]),
+      { value: '', disabled: false }, [Validators.required, Validators.minLength(6)]),
+    passwordConfirmation: new FormControl('', [LoginValidators.matchOtherValidator('password')]),
   });
 
   constructor(

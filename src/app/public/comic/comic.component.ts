@@ -15,12 +15,7 @@ export class ComicComponent implements OnInit {
     private comicService: ComicService,
     private route: ActivatedRoute,
     ) {
-    this.route.queryParamMap
-      .subscribe(params => {
-        if (params["id"]) {
-          this.comicId = params["id"]
-        }
-      });
+      this.route.params.subscribe( params => this.comicId = params.idComic );
   }
 
   ngOnInit() {

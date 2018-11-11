@@ -41,17 +41,14 @@ export class ComicService {
 
         const formData = new FormData();
 
-        formData.append('image', image);
-
-        let payload = {
-            name: comicForm.name,
-            description: comicForm.description,
-            is_public: comicForm.isPublic,
-            is_comments_active: comicForm.isCommentActive,
-            thumbnail: formData
-        }
+        formData.append('name', comicForm.name);
+        formData.append('description', comicForm.description);
+        formData.append('is_public', comicForm.isPublic);
+        formData.append('is_comments_active', comicForm.isCommentActive);
+        formData.append('cover', image);
+        
         return this.http
-        .post<Comic>(environment.baseUrl + 'comics', payload)
+        .post<Comic>(environment.baseUrl + 'comics', formData)
         .catch((error: any) => Observable.throw(error || "Server error"));
     }
 }

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 // Services
-import { ComicService } from '../services/comic.service';
+import { ComicService } from '../../services/comic.service';
 
 // Models
-import { Comic } from '../models/comic';
+import { Comic } from '../../models/comic';
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,15 +14,13 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 	cover_sample: string = "./assets/cover_sample.jpg"
-	comicList: Array<Comic> = []
+	comicList: Array<Comic>
 
 	constructor(private router: Router, private comicService: ComicService) { }
 
 	ngOnInit() {
 		this.comicService.getComics().subscribe(comics => {
-			for(var i=0;i < 10;i++){
-				this.comicList.push(comics[0])
-			}
+			this.comicList = comics
 		}, error => console.log(error))
 	}
 

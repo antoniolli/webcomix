@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { FileUploader } from 'ng2-file-upload';
+import { ComicService } from 'src/app/services/comic.service';
 
-const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
+class ImageSnippet {
+  pending: boolean = false;
+  status: string = 'init';
+
+  constructor(public src: string, public file: File) { }
+}
 
 @Component({
   selector: 'app-comic-manager',
@@ -18,20 +23,48 @@ export class ComicManagerComponent implements OnInit {
     description: new FormControl(
       { value: '', disabled: false }, [Validators.required]),
     isPublic: new FormControl(
-      { value: '', disabled: false }, [Validators.required]),
+      { value: 'true', disabled: false }, [Validators.required]),
     isCommentActive: new FormControl(
-      { value: '', disabled: false }, [Validators.required])
+      { value: 'true', disabled: false }, [Validators.required])
   });
-  public uploader:FileUploader = new FileUploader({url: URL});
-  public hasAnotherDropZoneOver:boolean = false;
 
-  constructor() { }
+  selectedFile: ImageSnippet;
 
-  ngOnInit() {
+  constructor(private comicService: ComicService) { }
+
+  ngOnInit() { }
+
+  private onSuccess() {
+    this.selectedFile.pending = false;
+    this.selectedFile.status = 'ok';
   }
 
-  public fileOverAnother(e:any):void {
-    this.hasAnotherDropZoneOver = e;
+  private onError() {
+    this.selectedFile.pending = false;
+    this.selectedFile.status = 'fail';
+    this.selectedFile.src = '';
+  }
+
+  processFile(imageInput: any) {
+    const file: File = imageInput.files[0];
+    const reader = new FileReader();
+
+    reader.addEventListener('load', (event: any) => {
+      this.selectedFile = new ImageSnippet(event.target.result, file);
+      this.selectedFile.pending = true;
+    });
+
+    reader.readAsDataURL(file);
+  }
+
+  submitForm() {
+    this.comicService.persistComic(this.comicForm.value, this.selectedFile.file).subscribe(
+      (res) => {
+        this.onSuccess();
+      },
+      (err) => {
+        this.onError();
+      })
   }
 
 }

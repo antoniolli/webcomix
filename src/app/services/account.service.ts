@@ -18,7 +18,11 @@ export class AccountService {
     constructor(private jwt: JwtHelperService, private http: HttpClient) { }
 
     login(loginForm: any) {
-        return this.http.post<any>(environment.baseUrl + '/auth/login', { email: loginForm.email, password: loginForm.password})
+        let payload = { 
+            email: loginForm.email, 
+            password: loginForm.password 
+        }
+        return this.http.post<any>(environment.baseUrl + '/auth/login', payload)
             .map(response => {
                 // login successful if there's a jwt token in the response
                 if (response && response.auth_token && response.user) {
@@ -26,13 +30,13 @@ export class AccountService {
                     localStorage.setItem(environment.authTokenName, JSON.stringify(response.auth_token));
                     localStorage.setItem('user', JSON.stringify(response.user));
                 }
- 
+
                 return response;
             });
     }
 
     logout() {
-        localStorage.clear()    
+        localStorage.clear()
     }
 
     getLocalUser() {
@@ -58,35 +62,24 @@ export class AccountService {
         return false;
     }
 
-    changePassword(data): Observable<true> {
+    persistUser(signUpForm: any): Observable<User> {
+        let payload = {
+            name: signUpForm.name,
+            email: signUpForm.email,
+            password: signUpForm.password,
+            password_confirmation: signUpForm.passwordConfirmation
+        }
         return this.http
-            .post<true>(environment.baseUrl + "account/change-password", data)
-            .catch((error: any) => {
-                return Observable.throw(error || "Server error");
+            .post<any>(environment.baseUrl + "/signup", payload)
+            .map(response => {
+                // login successful if there's a jwt token in the response
+                if (response && response.auth_token && response.user) {
+                    // store user details and jwt token in local storage to keep user logged in between page refreshes
+                    localStorage.setItem(environment.authTokenName, JSON.stringify(response.auth_token));
+                    localStorage.setItem('user', JSON.stringify(response.user));
+                }
+
+                return response;
             });
-    }
-
-    persist(user: User): Observable<User> {
-        return this.http
-            .post<User>(environment.baseUrl + "profile/persist", user)
-            .catch((error: any) => {
-                return Observable.throw(error || "Server error");
-            });
-    }
-
-    updateAvatar(file: File): Observable<any> {
-        let formData = new FormData();
-        formData.append("file", file, file.name);
-
-        return this.http
-            .post(environment.baseUrl + "account/update-avatar", formData)
-            .map((res: Response) => res.json())
-            .catch((error: any) => Observable.throw(error || "Server error"));
-    }
-
-    removeAvatar(): Observable<any> {
-        return this.http
-            .post(environment.baseUrl + "account/remove-avatar", {})
-            .catch((error: any) => Observable.throw(error || "Server error"));
     }
 }

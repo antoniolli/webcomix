@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes }  from '@angular/router';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PageNotFoundComponent } from './public/page-not-found/page-not-found.component';
 import { AuthenticationGuard } from './services/authentication.guard';
-import { HomeComponent } from './home/home.component';
-import { ComicComponent } from './comic/comic.component';
-import { AuthenticateComponent } from './authenticate/authenticate.component';
+import { HomeComponent } from './public/home/home.component';
+import { ComicComponent } from './public/comic/comic.component';
+import { AuthenticateComponent } from './public/authenticate/authenticate.component';
 
 
 const appRoutes: Routes = [

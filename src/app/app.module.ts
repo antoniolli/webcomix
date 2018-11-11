@@ -23,12 +23,12 @@ import { TokenInterceptor } from './services/token.interceptor';
 
 //Components
 import { AppComponent } from './app.component';
-import { MenuSidebarComponent } from './menu-sidebar/menu-sidebar.component';
-import { MenuLoginComponent } from './menu-login/menu-login.component';
-import { HomeComponent } from './home/home.component';
-import { ComicComponent } from './comic/comic.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { AuthenticateComponent } from './authenticate/authenticate.component';
+import { MenuSidebarComponent } from './public/menu-sidebar/menu-sidebar.component';
+import { MenuLoginComponent } from './public/menu-login/menu-login.component';
+import { HomeComponent } from './public/home/home.component';
+import { ComicComponent } from './public/comic/comic.component';
+import { PageNotFoundComponent } from './public/page-not-found/page-not-found.component';
+import { AuthenticateComponent } from './public/authenticate/authenticate.component';
 
 //Material Design
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -44,7 +44,8 @@ import {
   MdcRippleModule,
   MdcFormFieldModule,
   MdcTextFieldModule,
-  MdcTypographyModule,   } from '@angular-mdc/web';
+  MdcTypographyModule,
+  MdcFabModule,   } from '@angular-mdc/web';
 
 
 registerLocaleData(localePt, 'pt-BR');
@@ -80,6 +81,7 @@ registerLocaleData(localePt, 'pt-BR');
     MdcFormFieldModule,
     MdcTextFieldModule,
     MdcTypographyModule,
+    MdcFabModule
   ],
   exports: [FilterPipe],
   providers: [

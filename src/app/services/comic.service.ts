@@ -30,4 +30,28 @@ export class ComicService {
             .get<Array<Comic>>(environment.baseUrl + "comics/" + (page || ""))
             .catch((error: any) => Observable.throw(error || "Server error"));
     }
+
+    getComic(comicId: string): Observable<Comic> {
+        return this.http
+            .get<Comic>(environment.baseUrl + "comics/" + comicId)
+            .catch((error: any) => Observable.throw(error || "Server error"));
+    }
+
+    persistComic(comicForm: any, image: File): Observable<Comic> {
+
+        const formData = new FormData();
+
+        formData.append('image', image);
+
+        let payload = {
+            name: comicForm.name,
+            description: comicForm.description,
+            is_public: comicForm.isPublic,
+            is_comments_active: comicForm.isCommentActive,
+            thumbnail: formData
+        }
+        return this.http
+        .post<Comic>(environment.baseUrl + 'comics', payload)
+        .catch((error: any) => Observable.throw(error || "Server error"));
+    }
 }

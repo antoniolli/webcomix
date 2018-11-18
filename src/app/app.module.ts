@@ -45,7 +45,9 @@ import {
   MdcFormFieldModule,
   MdcTextFieldModule,
   MdcTypographyModule,
-  MdcFabModule,   } from '@angular-mdc/web';
+  MdcIconButtonModule,
+  MdcFabModule,
+  MdcSelectModule,   } from '@angular-mdc/web';
 
 
 registerLocaleData(localePt, 'pt-BR');
@@ -81,7 +83,9 @@ registerLocaleData(localePt, 'pt-BR');
     MdcFormFieldModule,
     MdcTextFieldModule,
     MdcTypographyModule,
-    MdcFabModule
+    MdcFabModule,
+    MdcIconButtonModule,
+    MdcSelectModule
   ],
   exports: [FilterPipe],
   providers: [

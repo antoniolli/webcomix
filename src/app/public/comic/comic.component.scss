@@ -1,0 +1,39 @@
+.wrapper{
+  width: 90%;
+  margin: auto;
+
+  .comic-card{
+    margin: 2rem;
+    padding: 1rem;
+    text-align: center;
+    .comic-card-navigation{
+      padding: 2rem 0;
+      .mdc-select{
+        width: 18vh;
+      }
+    }
+    
+    .comic-card-img{
+
+    }
+    
+    .comic-card-comments{
+      text-align: left;
+      .comment-body{
+        display: inline-flex;
+        vertical-align: middle;
+        mdc-icon{
+          position: relative;
+          top: 10px;
+          margin-right: 10px;
+        }
+        .comment-message{
+          p {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+
+}

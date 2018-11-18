@@ -1,0 +1,13 @@
+@import "~@angular-mdc/theme/material";
+
+.menu-list {
+
+    @include mdc-list-item-graphic-ink-color(white);
+    
+    @include mdc-list-divider-color($material-color-pink-50);
+    
+    @include mdc-list-item-primary-text-ink-color($material-color-blue-600);
+    @include mdc-list-item-graphic-ink-color($material-color-blue-100);
+    @include mdc-list-item-meta-ink-color($material-color-orange-500);
+    
+}

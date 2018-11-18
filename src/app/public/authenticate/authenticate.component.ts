@@ -11,19 +11,19 @@ import { LoginValidators } from '../../validators/login-validators';
 })
 export class AuthenticateComponent implements OnInit {
   redirectUrl: string;
-
+  signUpFormIsOppened: boolean
   loginForm = new FormGroup({
     email: new FormControl(
-      { value: '', disabled: false }, [Validators.required]),
+      { value: '', disabled: false }, [Validators.required, Validators.email]),
     password: new FormControl(
-      { value: '', disabled: false }, [Validators.required]),
+      { value: '', disabled: false }, [Validators.required, Validators.minLength(6)]),
   });
 
   signUpForm = new FormGroup({
     name: new FormControl(
       { value: '', disabled: false }, [Validators.required]),
     email: new FormControl(
-      { value: '', disabled: false }, [Validators.required]),
+      { value: '', disabled: false }, [Validators.required, Validators.email]),
     password: new FormControl(
       { value: '', disabled: false }, [Validators.required, Validators.minLength(6)]),
     passwordConfirmation: new FormControl('', [LoginValidators.matchOtherValidator('password')]),
@@ -42,6 +42,10 @@ export class AuthenticateComponent implements OnInit {
           this.redirectUrl = params.get('redirectTo');
         }
       });
+    if (this.route.snapshot.url[0].path == "login")
+      this.signUpFormIsOppened = false
+    else
+      this.signUpFormIsOppened = true;
   }
 
   submitForm(action: string) {

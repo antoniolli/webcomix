@@ -27,7 +27,14 @@ export class MenuLoginComponent implements OnInit {
     this.user = null;
   }
 
-  goToAuthenticate() {
-    this.router.navigateByUrl('login')
+  goToAuthenticate(action: string) {
+    if (action == "login")
+      this.router.navigateByUrl('login')
+    else
+      this.router.navigateByUrl("signup")
+  }
+
+  goToProfile() {
+    this.router.navigateByUrl('dashboard/profile')
   }
 }

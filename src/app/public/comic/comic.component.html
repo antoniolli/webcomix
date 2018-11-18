@@ -1,10 +1,48 @@
-<mdc-image-list #demolist class="standard-image-list">
-    <mdc-image-list-item *ngFor="let c of comicList" (click)="goToComic(c.id)">
-      <mdc-image-list-image-aspect>
-        <img mdcImageListImage [src]="c.cover_url != null ? c.cover_url : cover_sample" />
-      </mdc-image-list-image-aspect>
-      <mdc-image-list-supporting>
-        <span mdcImageListLabel>{{c.name}}</span>
-      </mdc-image-list-supporting>
-    </mdc-image-list-item>
-  </mdc-image-list>
+<div class="wrapper">
+  <mdc-card *ngIf="comic" class="comic-card">
+    <div class="comic-card-article-group-heading" mdcHeadline5>{{comic.name}}</div>
+    <div class="comic-card-article-group-heading" mdcSubtitle1>criado por {{comic.author}}</div>
+    <mdc-ripple class="comic-card-navigation">
+      <button mdc-icon-button icon="keyboard_arrow_left" (click)="goBack()" [disabled]="selectedPage == comic.pages[0]"></button>
+      <mdc-select placeholder="escolha a página" outlined [formControl]="pageControl" (selectionChange)="onSelectedPageChange($event.index)">
+        <option *ngFor="let page of comic.pages" [ngValue]="page">
+          {{page.title}}
+        </option>
+      </mdc-select>
+      <button mdc-icon-button icon="keyboard_arrow_right" (click)="goNext()" [disabled]="selectedPage == comic.pages[comic.pages.length -1]"></button>
+    </mdc-ripple>
+    <mdc-ripple class="comic-card-img">
+      <img [src]="selectedPage?.url ? selectedPage?.url : pageSample" alt="Smiley face">
+    </mdc-ripple>
+    <mdc-ripple class="comic-card-navigation">
+      <button mdc-icon-button icon="keyboard_arrow_left" (click)="goBack()" [disabled]="selectedPage == comic.pages[0]"></button>
+      <mdc-select placeholder="escolha a página" outlined [formControl]="pageControl" (selectionChange)="onSelectedPageChange($event.index)">
+        <option *ngFor="let page of comic.pages" [ngValue]="page">
+          {{page.title}}
+        </option>
+      </mdc-select>
+      <button mdc-icon-button icon="keyboard_arrow_right" (click)="goNext()" [disabled]="selectedPage == comic.pages[comic.pages.length -1]"></button>
+    </mdc-ripple>
+    <mdc-card-actions>
+      <mdc-card-action-icons>
+        <button mdcIconButton mdcCardAction="icon" (click)="markAsFavorite()">
+          <mdc-icon mdcIconOn>favorite</mdc-icon>
+          <mdc-icon>favorite_border</mdc-icon>
+        </button>
+      </mdc-card-action-icons>
+    </mdc-card-actions>
+    <mdc-list-divider></mdc-list-divider>
+    <mdc-ripple class="comic-card-comments">
+      <h2 class="comic-card-article__title" mdcHeadline5>Comentários</h2>
+      <div *ngFor="let comment of comments" class="comment-body">
+        <mdc-icon>account_circle</mdc-icon>
+        <div class="comment-message">
+          <p mdcCaption>{{comment.author}}</p>
+          <p mdcBody2>
+            {{comment.message}}
+          </p>
+        </div>
+      </div>
+    </mdc-ripple>
+  </mdc-card>
+</div>

@@ -5,8 +5,19 @@
     @include mdc-image-list-standard-columns(4);
 }
 
-mdc-image-list-item {
-    cursor: pointer;
+mdc-image-list {
+    padding: 2rem 4rem !important;
+    mdc-image-list-item {
+        cursor: pointer;
+    }
+}
+
+.searchBox{
+    text-align: center;
+    padding: 2rem;
+    margin: auto;
+    width: 40vh;
+
 }
 
 .masonry-image-list {

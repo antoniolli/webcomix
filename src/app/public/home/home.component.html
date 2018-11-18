@@ -1,9 +1,10 @@
-<div class="form-group mt-3">
-	<label for="slctCustomer" class="form-label form-label-sm">Pesquise seus clientes que terão acesso:</label>
-	<input id="slctCustomer" type="text" class="form-control form-control-sm" [(ngModel)]="searchText" />
+<div class="searchBox">
+	<mdc-text-field label="Busque aqui sua comic favorita" fullwidth [(ngModel)]="searchText">
+			<mdc-icon mdcTextFieldIcon trailing>search</mdc-icon>
+	</mdc-text-field>
 </div>
 <mdc-image-list #demolist class="standard-image-list">
-	<mdc-image-list-item *ngFor="let c of comicList" (click)="goToComic(c.id)">
+	<mdc-image-list-item *ngFor="let c of comicList | filter: searchText" (click)="goToComic(c.id)">
 		<mdc-image-list-image-aspect>
 			<img mdcImageListImage [src]="c.url != '' ? c.url : cover_sample" />
 		</mdc-image-list-image-aspect>

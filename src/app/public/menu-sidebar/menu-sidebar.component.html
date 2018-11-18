@@ -1,1 +1,40 @@
-<p>HOLY SHIT</p>
+<mdc-list-group>
+    <mdc-list twoLine avatar singleSelection useActivated class="menu-list">
+        <mdc-list-item (click)="goToHome()">
+            <mdc-icon mdcListItemGraphic>home</mdc-icon>
+            <mdc-list-item-text secondaryText="listagem de comics">Home</mdc-list-item-text>
+        </mdc-list-item>
+        <mdc-list-item (click)="goToDashboard()">
+            <mdc-icon mdcListItemGraphic>dashboard</mdc-icon>
+            <mdc-list-item-text secondaryText="área administrativa">Dashboard</mdc-list-item-text>
+            <a href="#" mdcListItemMeta mdcIcon aria-label="View more information" title="More info" onclick="event.preventDefault();">info</a>
+        </mdc-list-item>
+        <mdc-list-item (click)="goToFavorites()">
+            <mdc-icon mdcListItemGraphic>favorite</mdc-icon>
+            <mdc-list-item-text secondaryText="comics favoritas">Favoritos</mdc-list-item-text>
+            <a href="#" mdcListItemMeta mdcIcon aria-label="View more information" title="More info" onclick="event.preventDefault();">info</a>
+        </mdc-list-item>
+        <mdc-list-divider inset></mdc-list-divider>
+        <h3 mdcListGroupSubheader>Área de criação</h3>
+        <mdc-list-item (click)="goToCreateComic()">
+            <mdc-icon mdcListItemGraphic>add_to_photos</mdc-icon>
+            <mdc-list-item-text>Criar comic
+            </mdc-list-item-text>
+        </mdc-list-item>
+        <mdc-list-item (click)="goToEditComic()">
+            <mdc-icon mdcListItemGraphic>create</mdc-icon>
+            <mdc-list-item-text>Editar comic
+            </mdc-list-item-text>
+        </mdc-list-item>
+        <mdc-list-item (click)="goToCreatePage()">
+            <mdc-icon mdcListItemGraphic>collections</mdc-icon>
+            <mdc-list-item-text>Criar página
+            </mdc-list-item-text>
+        </mdc-list-item>
+        <mdc-list-item (click)="goToEditPage()">
+            <mdc-icon mdcListItemGraphic>create</mdc-icon>
+            <mdc-list-item-text>Editar página
+            </mdc-list-item-text>
+        </mdc-list-item>
+    </mdc-list>
+</mdc-list-group>

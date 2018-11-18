@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PageManagerComponent } from './page-manager.component';
+import { FavoritesManagerComponent } from './favorites-manager.component';
 
-describe('PageManagerComponent', () => {
-  let component: PageManagerComponent;
-  let fixture: ComponentFixture<PageManagerComponent>;
+describe('FavoritesManagerComponent', () => {
+  let component: FavoritesManagerComponent;
+  let fixture: ComponentFixture<FavoritesManagerComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PageManagerComponent ]
+      declarations: [ FavoritesManagerComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PageManagerComponent);
+    fixture = TestBed.createComponent(FavoritesManagerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

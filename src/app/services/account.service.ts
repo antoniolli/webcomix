@@ -15,12 +15,15 @@ import { environment } from "../../environments/environment";
     providedIn: 'root'
 })
 export class AccountService {
+
+    private logger = new Subject<boolean>();
+
     constructor(private jwt: JwtHelperService, private http: HttpClient) { }
 
     login(loginForm: any) {
-        let payload = { 
-            email: loginForm.email, 
-            password: loginForm.password 
+        let payload = {
+            email: loginForm.email,
+            password: loginForm.password
         }
         return this.http.post<any>(environment.baseUrl + '/auth/login', payload)
             .map(response => {
@@ -29,23 +32,30 @@ export class AccountService {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
                     localStorage.setItem(environment.authTokenName, JSON.stringify(response.auth_token));
                     localStorage.setItem('user', JSON.stringify(response.user));
+                    this.logger.next(true);
                 }
 
                 return response;
             });
     }
 
+    isLoggedIn(): Observable<boolean> {
+        return this.logger.asObservable();
+    }
+
     logout() {
-        localStorage.clear()
+        localStorage.clear();
+        this.logger.next(false);
     }
 
     getLocalUser() {
         return JSON.parse(localStorage.getItem('user'));
     }
-    /**
-     * Determines whether user is authenticated
-     * @returns true if authenticated
-     */
+
+    setLocalUser(user: User) {
+        return JSON.parse(localStorage.getItem('user'));
+    }
+
     isAuthenticated(): boolean {
         let token = this.jwt.tokenGetter();
 
@@ -77,6 +87,7 @@ export class AccountService {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
                     localStorage.setItem(environment.authTokenName, JSON.stringify(response.auth_token));
                     localStorage.setItem('user', JSON.stringify(response.user));
+                    this.logger.next(true);
                 }
 
                 return response;

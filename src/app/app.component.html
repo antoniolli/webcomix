@@ -1,7 +1,7 @@
-<mdc-top-app-bar #demoappbar [short]="false" [dense]="on" [fixed]="off">
+<mdc-top-app-bar #webcomixAppbar [short]="false" [dense]="on" [fixed]="off">
 	<mdc-top-app-bar-row>
 		<mdc-top-app-bar-section align="start">
-			<mdc-icon mdcTopAppBarNavIcon (click)="demoDismissible.open = !demoDismissible.open">menu</mdc-icon>
+			<mdc-icon mdcTopAppBarNavIcon (click)="sidebarMenu.open = !sidebarMenu.open">menu</mdc-icon>
 		</mdc-top-app-bar-section>
 		<mdc-top-app-bar-section class="justify-center" align="center" (click)="goToHome()">
 			<h2 class="text-click">Webcomix</h2>
@@ -9,8 +9,8 @@
 		<mdc-top-app-bar-section align="end">
 			<span mdcSubtitle2 *ngIf="user">Bem vindo, {{user.name}}</span>
 			<div mdcMenuSurfaceAnchor #demoanchor>
-				<mdc-icon mdcTopAppBarActionItem (click)="demomenu.open = !demomenu.open">account_circle</mdc-icon>
-				<mdc-menu #demomenu anchorCorner="bottomStart" class="justify-center">
+				<mdc-icon mdcTopAppBarActionItem (click)="loginMenu.open = !loginMenu.open">account_circle</mdc-icon>
+				<mdc-menu #loginMenu anchorCorner="bottomStart" class="justify-center">
 					<app-menu-login [user]="user"></app-menu-login>
 				</mdc-menu>
 			</div>
@@ -18,14 +18,10 @@
 	</mdc-top-app-bar-row>
 </mdc-top-app-bar>
 <div class="mdc-top-app-bar--fixed-adjust">
-	<mdc-drawer drawer="modal" #demoDismissible>
-		<mdc-drawer-header title="Drawer Title" subtitle="Subtitle"></mdc-drawer-header>
+	<mdc-drawer drawer="modal" #sidebarMenu>
+		<mdc-drawer-header title="Menu"></mdc-drawer-header>
 		<mdc-drawer-content>
-			<mdc-list useActivatedClass>
-				<mdc-list-item *ngFor="let item of destinations">
-					<mdc-icon mdcListItemGraphic *ngIf="item.icon">{{item.icon}}</mdc-icon>{{item.label}}
-				</mdc-list-item>
-			</mdc-list>
+			<app-menu-sidebar [sidebarMenu]="sidebarMenu"></app-menu-sidebar>
 		</mdc-drawer-content>
 	</mdc-drawer>
 	<div class="demo-drawer-app-content" mdcDrawerAppContent>

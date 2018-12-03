@@ -43,17 +43,22 @@ export class ComicComponent implements OnInit {
 
     this.comicService.getComic(this.comicId).mergeMap(comic => {
       this.comic = comic
-      this.selectedPage = this.comic.pages[this.comic.pages.length - 1];
-      this.pageControl.setValue(this.selectedPage.title)
+      if(comic.pages.length > 0) {
+        this.selectedPage = this.comic.pages[this.comic.pages.length - 1];
+        this.pageControl.setValue(this.selectedPage.title)
+      }
+      
       return this.comicService.isFavorite(this.comicId)
     }).subscribe(isFavorite => this.isFavorite = isFavorite)
       , error => console.log(error)
   }
 
   onSelectedPageChange(index: number) {
-    this.selectedPage = this.comic.pages[index];
-    this.pageControl.setValue(this.selectedPage.title);
-    this.reloadComments()
+    if(this.comic.pages.length > 0) {
+      this.selectedPage = this.comic.pages[index];
+      this.pageControl.setValue(this.selectedPage.title);
+      this.reloadComments()
+    }
   }
 
   goNext() {
@@ -88,6 +93,12 @@ export class ComicComponent implements OnInit {
     let message = comment.value
     comment.setValue(null)
     this.commentService.persistComment(message, this.comicId, this.selectedPage.id).subscribe(comment => {
+      this.reloadComments()
+    })
+  }
+
+  deleteComment(commentId: number) {
+    this.commentService.deleteComment(commentId, this.comicId, this.selectedPage.id).subscribe(comment => {
       this.reloadComments()
     })
   }

@@ -36,7 +36,7 @@ export class CommentService {
             .catch((error: any) => Observable.throw(error || "Server error"));
     }
 
-    persistComment(message: string, comicId: number, pageId: number,): Observable<Comment> {
+    persistComment(message: string, comicId: number, pageId: number): Observable<Comment> {
 
         const formData = new FormData();
 
@@ -44,6 +44,12 @@ export class CommentService {
 
         return this.http
         .post<Comment>(`${environment.baseUrl}comics/${comicId}/pages/${pageId}/comments`, formData)
+        .catch((error: any) => Observable.throw(error || "Server error"));
+    }
+
+    deleteComment(commentId: number, comicId: number, pageId: number) {
+        return this.http
+        .delete<Comment>(`${environment.baseUrl}comics/${comicId}/pages/${pageId}/comments/${commentId}`)
         .catch((error: any) => Observable.throw(error || "Server error"));
     }
 }

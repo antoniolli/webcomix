@@ -19,18 +19,10 @@
     
     .comic-card-comments{
       text-align: left;
-      .comment-body{
-        display: inline-flex;
-        vertical-align: middle;
-        mdc-icon{
-          position: relative;
-          top: 10px;
-          margin-right: 10px;
-        }
-        .comment-message{
-          p {
-            margin-bottom: 0;
-          }
+      .comment-input{
+        mdc-list-item{
+          width: 70%;
+          margin: auto;
         }
       }
     }

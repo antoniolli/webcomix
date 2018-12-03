@@ -17,6 +17,11 @@ const dashboardRoutes: Routes = [
         canActivate: [AuthenticationGuard],
         children: [
             {
+                path: '',
+                component: ComicManagerComponent,
+                pathMatch: 'full'
+            },
+            {
                 path: 'favorites',
                 component: FavoritesManagerComponent,
                 pathMatch: 'full'
@@ -33,8 +38,7 @@ const dashboardRoutes: Routes = [
             },
             {
                 path: 'comics/:idComic',
-                component: ComicEditComponent,
-
+                component: ComicEditComponent
             },
             {
                 path: 'comics/:idComic/pages',

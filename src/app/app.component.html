@@ -1,12 +1,12 @@
 <mdc-top-app-bar #webcomixAppbar [short]="false" [dense]="on" [fixed]="off">
 	<mdc-top-app-bar-row>
-		<mdc-top-app-bar-section align="start">
+		<mdc-top-app-bar-section class="top-bar-left">
 			<mdc-icon mdcTopAppBarNavIcon (click)="sidebarMenu.open = !sidebarMenu.open">menu</mdc-icon>
 		</mdc-top-app-bar-section>
-		<mdc-top-app-bar-section class="justify-center" align="center" (click)="goToHome()">
+		<mdc-top-app-bar-section class="top-bar-center justify-center" (click)="goToHome()">
 			<h2 class="text-click">Webcomix</h2>
 		</mdc-top-app-bar-section>
-		<mdc-top-app-bar-section align="end">
+		<mdc-top-app-bar-section class="top-bar-right">
 			<span mdcSubtitle2 *ngIf="user">Bem vindo, {{user.name}}</span>
 			<div mdcMenuSurfaceAnchor #demoanchor>
 				<mdc-icon mdcTopAppBarActionItem (click)="loginMenu.open = !loginMenu.open">account_circle</mdc-icon>

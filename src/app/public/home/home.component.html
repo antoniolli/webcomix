@@ -1,15 +1,15 @@
 <div class="searchBox">
-	<mdc-text-field label="Busque aqui sua comic favorita" fullwidth [(ngModel)]="searchText">
+	<mdc-text-field label="Busque aqui sua comic favorita" fullwidth [(ngModel)]="searchText" (keyup)="searchComic(searchText)">
 			<mdc-icon mdcTextFieldIcon trailing>search</mdc-icon>
 	</mdc-text-field>
 </div>
 <mdc-image-list #demolist class="standard-image-list">
-	<mdc-image-list-item *ngFor="let c of comicList | filter: searchText" (click)="goToComic(c.id)">
+	<mdc-image-list-item *ngFor="let c of comicList" (click)="goToComic(c.id)">
 		<mdc-image-list-image-aspect>
 			<img mdcImageListImage [src]="c.url != '' ? c.url : cover_sample" />
 		</mdc-image-list-image-aspect>
-		<mdc-image-list-supporting>
-			<span mdcImageListLabel>{{c.name}}</span>
+		<mdc-image-list-supporting class="comic-card-name">
+			<span mdcSubtitle2>{{c.name}}</span>
 		</mdc-image-list-supporting>
 	</mdc-image-list-item>
 </mdc-image-list>

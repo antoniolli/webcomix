@@ -28,4 +28,10 @@ export class HomeComponent implements OnInit {
 		this.router.navigateByUrl('comics/' + comic_id)
 	}
 
+	searchComic(keyword: any) {
+		this.comicService.searchComics(keyword).subscribe(comics => {
+			this.comicList = comics
+		})
+	}
+
 }

@@ -1,3 +1,18 @@
-<p>
-  comic-list works!
-</p>
+<div class="wrapper">
+  <mdc-card class="comic-card">
+    <div class="comic-card-article-group-heading" mdcHeadline5>Suas comics</div>
+    <mdc-ripple class="comic-card-navigation">
+        <mdc-image-list #demolist class="standard-image-list">
+            <mdc-image-list-item *ngFor="let c of comicList">
+              <mdc-image-list-image-aspect (click)="goToEditComic(c.id)">
+                <img mdcImageListImage [src]="c.url != '' ? c.url : cover_sample" />
+              </mdc-image-list-image-aspect>
+              <mdc-image-list-supporting class="comic-card-name">
+                <span mdcSubtitle2>{{c.name}}</span>
+                <button mdc-icon-button icon="close" (click)="deleteComic(c.id)"></button>
+              </mdc-image-list-supporting>
+            </mdc-image-list-item>
+          </mdc-image-list>
+    </mdc-ripple>
+  </mdc-card>
+</div>

@@ -25,7 +25,7 @@
     </mdc-ripple>
     <mdc-card-actions>
       <mdc-card-action-icons>
-        <button mdcIconButton mdcCardAction="icon" (click)="markAsFavorite()">
+        <button [on]="isFavorite" mdcIconButton #favoriteIcon (click)="markAsFavorite(favoriteIcon)">
           <mdc-icon mdcIconOn>favorite</mdc-icon>
           <mdc-icon>favorite_border</mdc-icon>
         </button>
@@ -34,14 +34,22 @@
     <mdc-list-divider></mdc-list-divider>
     <mdc-ripple class="comic-card-comments">
       <h2 class="comic-card-article__title" mdcHeadline5>Comentários</h2>
-      <div *ngFor="let comment of comments" class="comment-body">
-        <mdc-icon>account_circle</mdc-icon>
-        <div class="comment-message">
-          <p mdcCaption>{{comment.author}}</p>
-          <p mdcBody2>
-            {{comment.message}}
-          </p>
-        </div>
+      <div class="comment-input">
+        <mdc-list #custom twoLine avatar class="comic-lis" interactive="false">
+          <mdc-list-item>
+            <mdc-text-field #commentInput label="escreva aqui seu comentário" fullwidth (keyup.enter)="sendComment(commentInput)"></mdc-text-field>
+            <button mdcListItemMeta mdc-icon-button icon="send" (click)="sendComment(commentInput)"></button>
+          </mdc-list-item>
+        </mdc-list>
+      </div>
+      <div class="comment-body">
+        <mdc-list #custom twoLine avatar class="demo-list--custom" interactive="false">
+          <mdc-list-item *ngFor="let comment of comments">
+              <mdc-icon mdcListItemGraphic>account_circle</mdc-icon>
+              <mdc-list-item-text secondaryText="por {{comment.name}}">{{comment.message}}</mdc-list-item-text>
+              <button *ngIf="user && user.id == comment.user_id" mdcListItemMeta mdc-icon-button icon="close" (click)="sendComment(commentInput)"></button>
+          </mdc-list-item>
+        </mdc-list>
       </div>
     </mdc-ripple>
   </mdc-card>

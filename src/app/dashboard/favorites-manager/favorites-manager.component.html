@@ -1,3 +1,20 @@
-<p>
-  favorites-manager works!
-</p>
+<mdc-image-list #demolist class="standard-image-list">
+  <mdc-image-list-item *ngFor="let c of comicList">
+    <mdc-image-list-image-aspect (click)="goToComic(c.comic_id)">
+      <img mdcImageListImage [src]="c.url != '' ? c.url : cover_sample" />
+    </mdc-image-list-image-aspect>
+    <mdc-image-list-supporting class="comic-card-name">
+      <span mdcSubtitle2>{{c.name}}</span>
+      <button  mdc-icon-button icon="close" (click)="deleteFromFavorite(c.comic_id)"></button>
+    </mdc-image-list-supporting>
+  </mdc-image-list-item>
+</mdc-image-list>
+
+<mdc-card class="favorites-card" *ngIf="comicList.length < 1">
+  <div class="favorites-card__primary">
+    <h1 class="page-not-found-card__title" mdcHeadline1>Desculpe</h1>
+  </div>
+  <div class="favorites-card__secondary" mdcBody2>
+    <h1 mdcSubtitle1>Você não possui nenhuma comic favorita</h1>
+  </div>
+</mdc-card>

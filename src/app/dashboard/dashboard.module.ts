@@ -23,8 +23,11 @@ import {
   MdcFabModule,
   MdcSwitchModule,
   MdcIconButtonModule,
-  MdcSelectModule
+  MdcSelectModule,
+  MdcCheckboxModule,
+  MdcDialogModule
 } from '@angular-mdc/web';
+import { DragulaModule } from 'ng2-dragula';
 import { ComicCreateComponent } from './comic-manager/comic-create/comic-create.component';
 import { ComicEditComponent } from './comic-manager/comic-edit/comic-edit.component';
 import { ComicListComponent } from './comic-manager/comic-list/comic-list.component';
@@ -58,7 +61,10 @@ import { ProfileManagerComponent } from './profile-manager/profile-manager.compo
     MdcFabModule,
     MdcSwitchModule,
     MdcIconButtonModule,
-    MdcSelectModule
+    MdcSelectModule,
+    MdcCheckboxModule,
+    MdcDialogModule,
+    DragulaModule.forRoot()
   ],
   declarations: [
     DashboardComponent,
@@ -72,6 +78,7 @@ import { ProfileManagerComponent } from './profile-manager/profile-manager.compo
     FavoritesManagerComponent,
     ProfileManagerComponent
   ],
+  entryComponents: [PageCreateComponent],
   bootstrap: [DashboardComponent]
 })
 export class DashboardModule { }

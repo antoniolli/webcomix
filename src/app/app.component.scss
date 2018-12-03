@@ -35,3 +35,17 @@ html, body {
 .text-click{
   cursor: pointer;
 }
+
+.top-bar-left {
+  position: absolute;
+  left: 0;
+}
+
+.top-bar-right {
+  position: absolute;
+  right: 0;
+}
+
+.top-bar-center {
+  margin: 0 70px;
+}

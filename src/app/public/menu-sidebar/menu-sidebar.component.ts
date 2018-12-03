@@ -29,7 +29,7 @@ export class MenuSidebarComponent implements OnInit {
   }
 
   goToFavorites() {
-    this.router.navigateByUrl('favorites')
+    this.router.navigateByUrl('dashboard/favorites')
     this.sidebarMenu.open = false;
   }
 

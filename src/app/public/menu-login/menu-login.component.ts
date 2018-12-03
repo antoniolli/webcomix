@@ -19,6 +19,7 @@ export class MenuLoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.user = this.accountService.getLocalUser();
   }
 
   logout(): void {

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
 import { AuthenticationGuard } from '../services/authentication.guard';
 import { ComicManagerComponent } from './comic-manager/comic-manager.component';
+import { ComicCreateComponent } from './comic-manager/comic-create/comic-create.component';
 import { PageCreateComponent } from './comic-manager/page-create/page-create.component';
 import { PageEditComponent } from './comic-manager/page-edit/page-edit.component';
 import { ComicEditComponent } from './comic-manager/comic-edit/comic-edit.component';
@@ -34,6 +35,11 @@ const dashboardRoutes: Routes = [
             {
                 path: 'comics',
                 component: ComicManagerComponent,
+                pathMatch: 'full'
+            },
+            {
+                path: 'comics/new',
+                component: ComicCreateComponent,
                 pathMatch: 'full'
             },
             {

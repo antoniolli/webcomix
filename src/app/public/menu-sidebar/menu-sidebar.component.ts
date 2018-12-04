@@ -34,7 +34,7 @@ export class MenuSidebarComponent implements OnInit {
   }
 
   goToCreateComic() {
-    this.router.navigateByUrl('dashboard/comics')
+    this.router.navigateByUrl('dashboard/comics/new')
     this.sidebarMenu.open = false;
   }
 

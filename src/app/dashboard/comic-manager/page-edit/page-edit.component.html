@@ -1,5 +1,5 @@
-<div mdcHeadline3 *ngIf="comic" class="comic-title">{{comic.name}}</div>
-<div mdcHeadline5 *ngIf="page" class="comic-title">{{page.title}}</div>
+<div mdcHeadline4 *ngIf="comic" class="comic-title">{{comic.name}}</div>
+<div mdcSubtitle1 *ngIf="page" class="comic-subtitle">{{page.title}}</div>
 <div class="wrapper">
   <mdc-card class="page-card">
     <div class="page-card-article-group-heading" mdcHeadline5>Editar dados</div>
@@ -63,28 +63,6 @@
               <mdc-icon mdcListItemGraphic>account_circle</mdc-icon>
               <mdc-list-item-text secondaryText="por {{comment.name}}">{{comment.message}}</mdc-list-item-text>
               <button mdcListItemMeta mdc-icon-button icon="close" (click)="deleteComment(comment.id)"></button>
-            </mdc-list-item>
-          </mdc-list>
-        </div>
-      </mdc-ripple>
-    </mdc-card>
-    <mdc-card class="subscribers-card">
-      <mdc-ripple class="subscribers">
-        <div class="subscribers-card-article-group-heading" mdcHeadline5>Gerenciador de seguidores</div>
-        <div class="comment-input">
-          <mdc-list #custom twoLine avatar class="comic-lis" interactive="false">
-            <mdc-list-item>
-              <mdc-text-field label="escreva aqui seu comentário" fullwidth></mdc-text-field>
-              <button mdcListItemMeta mdc-icon-button icon="send"></button>
-            </mdc-list-item>
-          </mdc-list>
-        </div>
-        <div class="comment-body">
-          <mdc-list #custom twoLine avatar class="demo-list--custom" interactive="false">
-            <mdc-list-item *ngFor="let comment of comments">
-              <mdc-icon mdcListItemGraphic>account_circle</mdc-icon>
-              <mdc-list-item-text secondaryText="por {{comment.name}}">{{comment.message}}</mdc-list-item-text>
-              <button *ngIf="user && user.id == comment.user_id" mdcListItemMeta mdc-icon-button icon="close" (click)="deleteComment(comment.id)"></button>
             </mdc-list-item>
           </mdc-list>
         </div>

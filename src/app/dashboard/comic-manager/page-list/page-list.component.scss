@@ -8,44 +8,35 @@
         margin: 2rem;
         padding: 1rem;
         text-align: center;
-        .comic-card-article-group-heading {
+        .page-list-article-group-heading {
             margin-bottom: 2rem;
         }
         .page-list-card-images{
             margin-bottom: 1rem;
             .container{
-                display: inline-flex;
+                display: flex;
                 flex-wrap: wrap;
                 width: auto;
-                img {
-                    max-height: 21vh;
-                    margin: 0.2rem;
-                    cursor: pointer;
-                }
-                .page-title {
-                    max-width: 10vh;
-                    margin: 0;
-                    display: inline-block;
-                    vertical-align: middle;
-                    margin-bottom: 15px;
-                }
-                .page-delete-button {
-                    display: inline-block;
-                }
-            }
-        }
-
-        .comic-card-img{
-
-        }
-
-        .comic-card-comments{
-            text-align: left;
-            .comment-input{
-                mdc-list-item{
-                    width: 70%;
-                    margin: auto;
-                }
+                .drag-item{
+                    margin: 0 0.2rem !important;
+                    img {
+                        height: 40vh;
+                        max-width: 27vh;
+                        cursor: pointer;
+                    }
+                    .page-action-container{
+                        width: 27vh;
+                        display: flex;
+                        flex-wrap: nowrap;
+                        justify-content: space-between;
+                        align-items: center;
+                        .page-title {
+                            margin: 0;
+                        }
+                        .page-delete-button {
+                        }
+                    }
+                }                
             }
         }
     }

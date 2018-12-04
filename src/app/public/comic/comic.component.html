@@ -1,49 +1,39 @@
-<div class="wrapper">
-  <mdc-card *ngIf="comic" class="comic-card">
-    <div class="comic-card-article-group-heading" mdcHeadline5>{{comic.name}}</div>
-    <div class="comic-card-article-group-heading" mdcSubtitle1>criado por {{comic.author}}</div>
-    <mdc-ripple class="comic-card-navigation">
-      <button mdc-icon-button icon="keyboard_arrow_left" (click)="goBack()" [disabled]="selectedPage == comic.pages[0]"></button>
-      <mdc-select placeholder="páginas" outlined [formControl]="pageControl" [disabled]="!selectedPage" (selectionChange)="onSelectedPageChange($event.index)">
-        <option *ngFor="let page of comic.pages" [ngValue]="page">
-          {{page.title}}
-        </option>
-      </mdc-select>
-      <button mdc-icon-button icon="keyboard_arrow_right" (click)="goNext()" [disabled]="selectedPage == comic.pages[comic.pages.length -1]"></button>
-    </mdc-ripple>
-    <mdc-ripple class="comic-card-img">
-      <img *ngIf="selectedPage" [src]="selectedPage?.url ? selectedPage?.url : pageSample" alt="Smiley face">
-      <div *ngIf="!selectedPage" class="page-not-found-card__primary">
+<div mdcHeadline4 *ngIf="comic" class="comic-title">{{comic.name}}</div>
+<div mdcSubtitle1 *ngIf="comic" class="comic-subtitle">criado por {{comic.author}}</div>
+<div class="wrapper" *ngIf="comic">
+  <div class="comic-card-img">
+    <img *ngIf="selectedPage" [src]="selectedPage?.url ? selectedPage?.url : pageSample" alt="Smiley face">
+    <div *ngIf="comic && !selectedPage">
+      <div class="page-not-found-card__primary">
         <h1 class="page-not-found-card__title" mdcHeadline1>Comic sem páginas</h1>
       </div>
       <div class="page-not-found-card__secondary" mdcBody2>
         <h1 mdcSubtitle1>Author ainda não cadastrou nenhuma página para essa comic</h1>
       </div>
-    </mdc-ripple>
-    <mdc-ripple class="comic-card-navigation">
+    </div>
+    <div class="comic-card-navigation">
       <button mdc-icon-button icon="keyboard_arrow_left" (click)="goBack()" [disabled]="selectedPage == comic.pages[0]"></button>
-      <mdc-select placeholder="páginas" outlined [formControl]="pageControl" [disabled]="!selectedPage" (selectionChange)="onSelectedPageChange($event.index)">
+      <mdc-select placeholder="páginas" outlined [formControl]="pageControl" [disabled]="!selectedPage"
+        (selectionChange)="onSelectedPageChange($event.index)">
         <option *ngFor="let page of comic.pages" [ngValue]="page">
           {{page.title}}
         </option>
       </mdc-select>
       <button mdc-icon-button icon="keyboard_arrow_right" (click)="goNext()" [disabled]="selectedPage == comic.pages[comic.pages.length -1]"></button>
-    </mdc-ripple>
-    <mdc-card-actions>
-      <mdc-card-action-icons>
-        <button [on]="isFavorite" mdcIconButton #favoriteIcon (click)="markAsFavorite(favoriteIcon)" [disabled]="!user">
-          <mdc-icon mdcIconOn>favorite</mdc-icon>
-          <mdc-icon>favorite_border</mdc-icon>
-        </button>
-      </mdc-card-action-icons>
-    </mdc-card-actions>
-    <mdc-list-divider></mdc-list-divider>
+      <button [on]="isFavorite" mdcIconButton #favoriteIcon (click)="markAsFavorite(favoriteIcon)" [disabled]="!user">
+        <mdc-icon mdcIconOn>favorite</mdc-icon>
+        <mdc-icon>favorite_border</mdc-icon>
+      </button>
+    </div>
+  </div>
+  <mdc-card *ngIf="comic" class="comic-card">
     <mdc-ripple class="comic-card-comments">
       <h2 class="comic-card-article__title" mdcHeadline5>Comentários</h2>
       <div class="comment-input">
         <mdc-list #custom twoLine avatar class="comic-lis" interactive="false">
           <mdc-list-item>
-            <mdc-text-field #commentInput label="escreva aqui seu comentário" fullwidth (keyup.enter)="sendComment(commentInput)" [disabled]="!user"></mdc-text-field>
+            <mdc-text-field #commentInput label="escreva aqui seu comentário" fullwidth (keyup.enter)="sendComment(commentInput)"
+              [disabled]="!user"></mdc-text-field>
             <button mdcListItemMeta mdc-icon-button icon="send" (click)="sendComment(commentInput)" [disabled]="!user"></button>
           </mdc-list-item>
         </mdc-list>
@@ -51,9 +41,9 @@
       <div class="comment-body">
         <mdc-list #custom twoLine avatar class="demo-list--custom" interactive="false">
           <mdc-list-item *ngFor="let comment of comments">
-              <mdc-icon mdcListItemGraphic>account_circle</mdc-icon>
-              <mdc-list-item-text secondaryText="por {{comment.name}}">{{comment.message}}</mdc-list-item-text>
-              <button *ngIf="user && user.id == comment.user_id" mdcListItemMeta mdc-icon-button icon="close" (click)="deleteComment(comment.id)"></button>
+            <mdc-icon mdcListItemGraphic>account_circle</mdc-icon>
+            <mdc-list-item-text secondaryText="por {{comment.name}}">{{comment.message}}</mdc-list-item-text>
+            <button *ngIf="user && user.id == comment.user_id" mdcListItemMeta mdc-icon-button icon="close" (click)="deleteComment(comment.id)"></button>
           </mdc-list-item>
         </mdc-list>
       </div>

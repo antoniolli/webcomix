@@ -3,7 +3,13 @@
 .comic-title{
     text-align: center;
     display: block;
-    padding: 1rem;
+    padding-top: 1rem;
+}
+
+.comic-subtitle{
+    text-align: center;
+    display: block;
+    padding-bottom: 1rem;
 }
 
 .wrapper{
@@ -32,13 +38,6 @@
                     }
                 }
             }
-        }
-    
-        .subscribers-card{
-            flex-grow: 1;
-            margin: 2rem;
-            padding: 1rem;
-            text-align: center;       
         }
     }
     

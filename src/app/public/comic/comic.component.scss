@@ -1,22 +1,35 @@
+@import "~@angular-mdc/theme/material";
+
+.comic-title{
+  text-align: center;
+  display: block;
+  padding-top: 1rem;
+}
+.comic-subtitle {
+  text-align: center;
+}
 .wrapper{
   width: 90%;
   margin: auto;
+  .comic-card-img{
+    margin: 2rem;
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  .comic-card-navigation{
+    margin-top: 2rem;
+    .mdc-select{
+      min-width: 20vh;
+    }
+  }
 
   .comic-card{
     margin: 2rem;
     padding: 1rem;
     text-align: center;
-    .comic-card-navigation{
-      padding: 2rem 0;
-      .mdc-select{
-        width: 18vh;
-      }
-    }
-    
-    .comic-card-img{
-
-    }
-    
+    width: 120vh;
+    margin: auto;
     .comic-card-comments{
       text-align: left;
       .comment-input{

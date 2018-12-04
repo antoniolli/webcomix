@@ -4,7 +4,7 @@
     <div class="comic-card-article-group-heading" mdcSubtitle1>{{comic.name}}</div>
     <mdc-ripple class="page-list-card-images" *ngIf="pageList && pageList.length > 0">
       <div class='container' dragula="CLICKS" [dragula]="PageItems" [(dragulaModel)]='pageList'>
-        <div *ngFor="let p of pageList" (click)="goToPage(p.id)">
+        <div *ngFor="let p of pageList" (click)="goToEditPage(p.id)">
           <img class="images" [src]="p.url != '' ? p.url : page_sample" />
           <div style="max-width:15vh">
             <span class="page-title" mdcSubtitle2>{{p.title}}</span>

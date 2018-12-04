@@ -59,4 +59,8 @@ export class PageListComponent implements OnInit {
     this.router.navigateByUrl(`dashboard/comics/${this.comic.id}/pages`);
   }
 
+  goToEditPage(pageId: number) {
+    this.router.navigateByUrl(`dashboard/comics/${this.comic.id}/pages/${pageId}`);
+  }
+
 }

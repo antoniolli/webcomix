@@ -1,0 +1,45 @@
+@import "~@angular-mdc/theme/material";
+
+.comic-title{
+    text-align: center;
+    display: block;
+    padding: 1rem;
+}
+
+.wrapper{
+    width: 90%;
+    margin: auto;
+
+    .page-card{
+        margin: 2rem;
+        padding: 1rem;
+        text-align: center;       
+    }
+    .container {
+        display: flex;
+        justify-content: space-between;
+        .comment-card {
+            flex-grow: 3;
+            margin: 2rem;
+            padding: 1rem;
+            text-align: center;  
+            .comments{
+                text-align: left;
+                .comment-input{
+                    mdc-list-item{
+                        width: 70%;
+                        margin: auto;
+                    }
+                }
+            }
+        }
+    
+        .subscribers-card{
+            flex-grow: 1;
+            margin: 2rem;
+            padding: 1rem;
+            text-align: center;       
+        }
+    }
+    
+}

@@ -20,9 +20,9 @@
         </option>
       </mdc-select>
       <button mdc-icon-button icon="keyboard_arrow_right" (click)="goNext()" [disabled]="selectedPage == comic.pages[comic.pages.length -1]"></button>
-      <button [on]="isFavorite" mdcIconButton #favoriteIcon (click)="markAsFavorite(favoriteIcon)" [disabled]="!user">
-        <mdc-icon mdcIconOn>favorite</mdc-icon>
-        <mdc-icon>favorite_border</mdc-icon>
+      <button [on]="isFavorite" mdcIconButton #favoriteIcon (click)="markAsFavorite(favoriteIcon)" [disabled]="!user || isBlocked">
+        <mdc-icon mdcIconOn class="favorite-icon">favorite</mdc-icon>
+        <mdc-icon class="unfavorite-icon">favorite_border</mdc-icon>
       </button>
     </div>
   </div>
@@ -33,8 +33,8 @@
         <mdc-list #custom twoLine avatar class="comic-lis" interactive="false">
           <mdc-list-item>
             <mdc-text-field #commentInput label="escreva aqui seu comentário" fullwidth (keyup.enter)="sendComment(commentInput)"
-              [disabled]="!user"></mdc-text-field>
-            <button mdcListItemMeta mdc-icon-button icon="send" (click)="sendComment(commentInput)" [disabled]="!user"></button>
+              [disabled]="!user || isBlocked"></mdc-text-field>
+            <button mdcListItemMeta mdc-icon-button icon="send" (click)="sendComment(commentInput)" [disabled]="!user || isBlocked"></button>
           </mdc-list-item>
         </mdc-list>
       </div>

@@ -62,7 +62,13 @@
             flex-grow: 1;
             margin: 2rem;
             padding: 1rem;
-            text-align: center;       
+            text-align: center;
+            .block-icon {
+                @include mdc-icon-button-ink-color(#de442c);   
+            }
+            .unblock-icon {
+                @include mdc-icon-button-ink-color(#000000);
+            }
         }
     }
 }

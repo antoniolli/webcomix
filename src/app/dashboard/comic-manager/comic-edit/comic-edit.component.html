@@ -66,7 +66,10 @@
                         <mdc-list-item *ngFor="let subscriber of subscribers">
                             <mdc-icon mdcListItemGraphic>account_circle</mdc-icon>
                             <mdc-list-item-text>{{subscriber.name}}</mdc-list-item-text>
-                            <button mdcListItemMeta mdc-icon-button icon="close" (click)="blockSubscriber(subscriber.id)"></button>
+                            <button mdcListItemMeta [on]="subscriber.is_blocked" mdcIconButton #blockIcon (click)="blockSubscriber(subscriber.id, blockIcon)">
+                                <mdc-icon mdcIconOn class="block-icon">block</mdc-icon>
+                                <mdc-icon>block</mdc-icon>
+                            </button>
                         </mdc-list-item>
                     </mdc-list>
                 </div>

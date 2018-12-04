@@ -24,26 +24,35 @@ export class SubscriberService {
 
   constructor(private http: HttpClient) {}
 
-    getSubscribers(comicId: string): Observable<Array<Subscriber>> {
+    getSubscribers(comicId: number): Observable<Array<Subscriber>> {
         return this.http
-            .get<Array<Subscriber>>(`${environment.baseUrl}/comics/${comicId}/subscribers`)
+            .get<Array<Subscriber>>(`${environment.baseUrl}comics/${comicId}/subscribers`)
             .catch((error: any) => Observable.throw(error || "Server error"));
     }
 
-    getSubscriber(comicId: string): Observable<Subscriber> {
+    getSubscriber(comicId: number): Observable<Subscriber> {
         return this.http
-            .get<Subscriber>(`${environment.baseUrl}/comics/${comicId}/subscribers`)
+            .get<Subscriber>(`${environment.baseUrl}comics/${comicId}/subscribers`)
             .catch((error: any) => Observable.throw(error || "Server error"));
     }
 
-    persistSubscriber(subscriberForm: any, comicId: string): Observable<Subscriber> {
+    persistSubscriber(subscriberForm: any, comicId: number): Observable<Subscriber> {
 
         const formData = new FormData();
 
         formData.append('name', subscriberForm.name);
         
         return this.http
-        .post<Subscriber>(`${environment.baseUrl}/comics/${comicId}/subscribers`, formData)
+        .post<Subscriber>(`${environment.baseUrl}comics/${comicId}/subscribers`, formData)
+        .catch((error: any) => Observable.throw(error || "Server error"));
+    }
+
+    blockSubscriber(subscriberId: number, comicId: number): Observable<Subscriber> {
+
+        const formData = new FormData();
+        
+        return this.http
+        .put<Subscriber>(`${environment.baseUrl}comics/${comicId}/subscribers/${subscriberId}`, formData)
         .catch((error: any) => Observable.throw(error || "Server error"));
     }
 }

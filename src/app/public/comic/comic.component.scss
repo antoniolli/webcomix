@@ -22,6 +22,13 @@
     .mdc-select{
       min-width: 20vh;
     }
+    .favorite-icon {
+        @include mdc-icon-button-ink-color(#de442c);   
+    }
+    .unfavorite-icon {
+      @include mdc-icon-button-ink-color(#b1b1b1);  
+      
+    }
   }
 
   .comic-card{

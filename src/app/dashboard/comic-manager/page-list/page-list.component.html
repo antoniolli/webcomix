@@ -2,9 +2,9 @@
   <mdc-card class="page-list-card" *ngIf="comic">
     <div class="page-list-article-group-heading" mdcHeadline5>Listagem de páginas</div>
     <mdc-ripple class="page-list-card-images" *ngIf="pageList && pageList.length > 0">
-      <div class='container' dragula="CLICKS" [dragula]="PageItems" [(dragulaModel)]='pageList'>
-        <div class="drag-item" *ngFor="let p of pageList" (click)="goToEditPage(p.id)">
-          <img class="images" [src]="p.url != '' ? p.url : page_sample" />
+      <div class='container' [dragula]="PageItems" [(dragulaModel)]='pageList'>
+        <div class="drag-item" *ngFor="let p of pageList">
+          <img class="images" [src]="p.url != '' ? p.url : page_sample" (click)="goToEditPage(p.id)" />
           <div class="page-action-container">
             <span class="page-title" mdcSubtitle2>{{p.title}}</span>
             <button class="page-delete-button" mdc-icon-button icon="close" (click)="deletePage(p.id)"></button>

@@ -5,6 +5,8 @@ import { AccountService } from 'src/app/services/account.service';
 import { Comic } from '../../../models/comic';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ImageSnippet } from '../../../models/image-snippet';
+import { SubscriberService } from '../../../services/subscriber.service';
+import { Subscriber } from '../../../models/subscriber';
 
 @Component({
   selector: 'app-comic-edit',
@@ -13,6 +15,7 @@ import { ImageSnippet } from '../../../models/image-snippet';
 })
 export class ComicEditComponent implements OnInit {
   comic: Comic;
+  subscribers: Array<Subscriber>
   comicId: number;
   cover_sample: string = "./assets/cover_sample.jpg"
   comicForm = new FormGroup({
@@ -34,6 +37,7 @@ export class ComicEditComponent implements OnInit {
     private route: ActivatedRoute,
     private comicService: ComicService,
     private accountService: AccountService,
+    private subscriberService: SubscriberService,
     private router: Router) {
     this.route.params.subscribe(params => this.comicId = params.idComic);
   }
@@ -48,6 +52,7 @@ export class ComicEditComponent implements OnInit {
       else {
         this.comic = comic
         this.loadForm(comic)
+        this.reloadSubscribers();
       }
 
     }, error => {
@@ -88,6 +93,17 @@ export class ComicEditComponent implements OnInit {
     });
   }
 
+  reloadSubscribers() {
+    this.subscriberService.getSubscribers(this.comicId).subscribe(subscribers => this.subscribers = subscribers)
+  }
+
+  blockSubscriber(subscriberId: number, blockIcon: any) {
+    this.subscriberService.blockSubscriber(subscriberId, this.comicId).subscribe(subscriber => {
+      blockIcon.on = subscriber.is_blocked
+      this.reloadSubscribers()
+    })
+  }
+
 
   submitForm() {
     if(this.selectedFile && this.selectedFile.pending) {
@@ -108,7 +124,6 @@ export class ComicEditComponent implements OnInit {
           this.onError();
         })
     }
-    
   }
 
 }

@@ -11,7 +11,8 @@ import { User } from './models/user';
 
 export class AppComponent {
     user: User;
-
+    avatarSample: string = "./assets/avatar_white_sample.png"
+    avatar: string;
     constructor(
         private router: Router,
         private accountService: AccountService

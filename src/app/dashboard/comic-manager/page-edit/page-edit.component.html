@@ -51,17 +51,28 @@
         <div class="comment-card-article-group-heading" mdcHeadline5>Gerenciador de comentários</div>
         <div class="comment-input">
           <mdc-list #custom twoLine avatar class="comic-lis" interactive="false">
-            <mdc-list-item>
-              <mdc-text-field #commentInput label="escreva aqui seu comentário" fullwidth (keyup.enter)="sendComment(commentInput)"></mdc-text-field>
-              <button mdcListItemMeta mdc-icon-button icon="send" (click)="sendComment(commentInput)"></button>
-            </mdc-list-item>
+              <mdc-list-item *ngIf="!editableComment">
+                  <mdc-text-field #commentInput label="escreva aqui seu comentário" fullwidth (keyup.enter)="sendComment(commentInput)"
+                    ></mdc-text-field>
+                  <button mdcListItemMeta mdc-icon-button icon="send" (click)="sendComment(commentInput)"></button>
+                </mdc-list-item>
+                <mdc-list-item *ngIf="editableComment">
+                  <mdc-text-field #commentEditInput [value]="editableComment.message" fullwidth (keyup.enter)="editComment(commentEditInput)"
+                    ></mdc-text-field>
+                  <button mdcListItemMeta mdc-icon-button icon="send" (click)="editComment(commentEditInput)"></button>
+                </mdc-list-item>
           </mdc-list>
         </div>
         <div class="comment-body">
           <mdc-list #custom twoLine avatar class="demo-list--custom" interactive="false">
             <mdc-list-item *ngFor="let comment of comments">
-              <mdc-icon mdcListItemGraphic>account_circle</mdc-icon>
+              <div class="avatar" *ngIf="!avatar" [ngStyle]="{'background-image': 'url('+ avatarSample + ')'}">
+              </div>
+              <div class="avatar" *ngIf="avatar" [ngStyle]="{'background-image': 'url('+ avatar + ')'}">
+              </div>
               <mdc-list-item-text secondaryText="por {{comment.name}}">{{comment.message}}</mdc-list-item-text>
+              <button *ngIf="current_user && current_user.id == comment.user_id" class="edit-comment-button" mdc-icon-button icon="create"
+                (click)="editableComment = comment"></button>
               <button mdcListItemMeta mdc-icon-button icon="close" (click)="deleteComment(comment.id)"></button>
             </mdc-list-item>
           </mdc-list>

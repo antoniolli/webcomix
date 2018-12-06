@@ -38,6 +38,18 @@
                     }
                 }
             }
+            .edit-comment-button{
+                position: absolute;
+                right: 4rem;
+                @include mdc-icon-button-ink-color(#b1b1b1);
+              }
+              .avatar {
+                height: 50px;
+                width: 50px;
+                margin-right: 12px;
+                border-radius: 50%;
+                background-size: contain;
+              }
         }
     }
     

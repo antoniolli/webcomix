@@ -94,4 +94,25 @@ export class AccountService {
                 return response;
             });
     }
+
+    updateProfile(profileForm: any, image?: File): Observable<User> {
+        
+        const formData = new FormData();
+
+        formData.append('name', profileForm.name);
+        formData.append('description', profileForm.id);
+        if(image)
+            formData.append('avatar', image);
+        
+        return this.http
+            .put<any>(`${environment.baseUrl}profile`, formData)
+            .map(response => {
+                // login successful if there's a jwt token in the response
+                if (response && response.auth_token && response.user) {
+                    localStorage.setItem('user', JSON.stringify(response.user));
+                    this.logger.next(true);
+                }
+                return response;
+            });
+    }
 }

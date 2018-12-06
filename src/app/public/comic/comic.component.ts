@@ -22,9 +22,12 @@ export class ComicComponent implements OnInit {
   comic: Comic;
   selectedPage: Page;
   comments: Array<Comment>;
+  editableComment: Comment;
   isFavorite: boolean = false;
   isBlocked: boolean = false;
   pageSample: string = "./assets/page_sample.jpg"
+  avatarSample: string = "./assets/avatar_black_sample.png"
+  avatar: string
 
   pageControl = new FormControl();
 
@@ -113,6 +116,15 @@ export class ComicComponent implements OnInit {
 
   deleteComment(commentId: number) {
     this.commentService.deleteComment(commentId, this.comicId, this.selectedPage.id).subscribe(comment => {
+      this.reloadComments()
+    })
+  }
+
+  editComment(comment: any) {
+    let message = comment.value
+    comment.setValue(null)
+    this.commentService.updateComment(message, this.editableComment.id, this.comicId, this.selectedPage.id).subscribe(comment => {
+      this.editableComment = null;
       this.reloadComments()
     })
   }

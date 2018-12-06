@@ -44,6 +44,16 @@ html, body {
 .top-bar-right {
   position: absolute;
   right: 0;
+  margin-top: 5px;
+  .avatar {
+    height: 35px;
+    width: 35px;
+    margin-right: 12px;
+    border-radius: 50%;
+    background-size: contain;
+    margin-left: 1rem;
+    cursor: pointer;
+  }
 }
 
 .top-bar-center {

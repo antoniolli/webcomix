@@ -9,6 +9,7 @@ import { ComicService } from '../../../services/comic.service';
 import { AccountService } from '../../../services/account.service';
 import { Page } from '../../../models/page';
 import { CommentService } from '../../../services/comment.service';
+import { User } from '../../../models/user';
 
 @Component({
   selector: 'app-page-edit',
@@ -20,7 +21,12 @@ export class PageEditComponent implements OnInit {
   comic: Comic
   pageId: number;
   page: Page
+  current_user: User;
   comments: Array<Comment>
+  editableComment: Comment;
+  avatarSample: string = "./assets/avatar_black_sample.png"
+  avatar: string
+
 
   pageForm = new FormGroup({
     id: new FormControl(
@@ -43,11 +49,11 @@ export class PageEditComponent implements OnInit {
     private commentService: CommentService,
     private accountService: AccountService
   ) {
-    let current_user = this.accountService.getLocalUser()
+    this.current_user = this.accountService.getLocalUser()
     this.route.params.subscribe(params => {
       this.pageId = params.idPage
       this.comicService.getMyComic(params.idComic).subscribe(comic => {
-        if (comic.user_id != current_user.id)
+        if (comic.user_id != this.current_user.id)
           this.router.navigateByUrl('dashboard');
         this.comic = comic
         this.pageService.getMyPage(this.comic.id, this.pageId).subscribe(page => this.loadForm(page))

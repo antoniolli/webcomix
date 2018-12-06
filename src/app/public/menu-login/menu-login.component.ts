@@ -11,6 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class MenuLoginComponent implements OnInit {
 
   @Input() user: User;
+  @Input() loginMenu: any;
 
   constructor(
     private router: Router,
@@ -26,6 +27,7 @@ export class MenuLoginComponent implements OnInit {
     this.accountService.logout()
     this.router.navigateByUrl('')
     this.user = null;
+    this.loginMenu.open = false
   }
 
   goToAuthenticate(action: string) {
@@ -33,9 +35,12 @@ export class MenuLoginComponent implements OnInit {
       this.router.navigateByUrl('login')
     else
       this.router.navigateByUrl("signup")
+    
+    this.loginMenu.open = false
   }
 
   goToProfile() {
     this.router.navigateByUrl('dashboard/profile')
+    this.loginMenu.open = false
   }
 }

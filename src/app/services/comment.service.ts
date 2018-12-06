@@ -52,4 +52,10 @@ export class CommentService {
         .delete<Comment>(`${environment.baseUrl}comics/${comicId}/pages/${pageId}/comments/${commentId}`)
         .catch((error: any) => Observable.throw(error || "Server error"));
     }
+
+    updateComment(message: string, commentId: number, comicId: number, pageId: number) {
+        return this.http
+        .put<Comment>(`${environment.baseUrl}comics/${comicId}/pages/${pageId}/comments/${commentId}`, message)
+        .catch((error: any) => Observable.throw(error || "Server error"));
+    }
 }

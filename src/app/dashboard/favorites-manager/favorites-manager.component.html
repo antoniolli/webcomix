@@ -1,4 +1,4 @@
-<mdc-image-list #demolist class="standard-image-list">
+<mdc-image-list *ngIf="comicList" #demolist class="standard-image-list">
   <mdc-image-list-item *ngFor="let c of comicList">
     <mdc-image-list-image-aspect (click)="goToComic(c.comic_id)">
       <img mdcImageListImage [src]="c.url != '' ? c.url : cover_sample" />
@@ -10,7 +10,7 @@
   </mdc-image-list-item>
 </mdc-image-list>
 
-<mdc-card class="favorites-card" *ngIf="comicList.length < 1">
+<mdc-card class="favorites-card" *ngIf="comicList && comicList.length < 1">
   <div class="favorites-card__primary">
     <h1 class="page-not-found-card__title" mdcHeadline1>Desculpe</h1>
   </div>

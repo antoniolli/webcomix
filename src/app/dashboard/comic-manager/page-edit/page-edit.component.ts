@@ -50,7 +50,7 @@ export class PageEditComponent implements OnInit {
         if (comic.user_id != current_user.id)
           this.router.navigateByUrl('dashboard');
         this.comic = comic
-        this.pageService.getPage(this.comic.id, this.pageId).subscribe(page => this.loadForm(page))
+        this.pageService.getMyPage(this.comic.id, this.pageId).subscribe(page => this.loadForm(page))
         this.reloadComments()
       }, error => {
         this.router.navigateByUrl('dashboard');
@@ -111,7 +111,7 @@ export class PageEditComponent implements OnInit {
     this.pageForm.patchValue({
       id: page.id,
       title: page.title,
-      description: page.number,
+      number: page.number,
       isPublic: page.is_public
     });
   }

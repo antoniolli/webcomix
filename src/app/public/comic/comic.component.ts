@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ComicService } from '../../services/comic.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Comic } from '../../models/comic';
 import { Page } from '../../models/page';
 import { Comment } from '../../models/comment';
@@ -36,6 +36,7 @@ export class ComicComponent implements OnInit {
     private accountService: AccountService,
     private subscriberService: SubscriberService,
     private route: ActivatedRoute,
+    private router: Router
   ) {
     this.route.params.subscribe(params => this.comicId = params.idComic);
   }
@@ -45,6 +46,8 @@ export class ComicComponent implements OnInit {
     this.user = this.accountService.getLocalUser();
     
     this.comicService.getComic(this.comicId).mergeMap(comic => {
+      if(!comic)
+        this.router.navigateByUrl(``)
       this.comic = comic
       if (comic.pages.length > 0) {
         this.selectedPage = this.comic.pages[this.comic.pages.length - 1];

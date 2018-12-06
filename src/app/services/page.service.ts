@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 export class PageService {
 
   constructor(private http: HttpClient) { }
-  
+
   getPages(comicId: number): Observable<Array<Page>> {
     return this.http
       .get<Array<Page>>(`${environment.baseUrl}comics/${comicId}/pages`)
@@ -44,14 +44,14 @@ export class PageService {
     formData.append('title', pageForm.title);
     formData.append('number', pageForm.number);
     formData.append('is_public', pageForm.isPublic);
-   
-    if(image)
-        formData.append('image', image);
-    
+
+    if (image)
+      formData.append('image', image);
+
     return this.http
-    .put<Page>(`${environment.baseUrl}comics/${comicId}/pages/${pageForm.id}`, formData)
-    .catch((error: any) => Observable.throw(error || "Server error"));
-}
+      .put<Page>(`${environment.baseUrl}comics/${comicId}/pages/${pageForm.id}`, formData)
+      .catch((error: any) => Observable.throw(error || "Server error"));
+  }
 
   updateNumberPage(pageForm: any, comicId: number): Observable<Page> {
 
@@ -66,6 +66,18 @@ export class PageService {
   deletePage(comicId: number, pageId: number): Observable<Page> {
     return this.http
       .delete<Page>(`${environment.baseUrl}comics/${comicId}/pages/${pageId}`)
+      .catch((error: any) => Observable.throw(error || "Server error"));
+  }
+
+  getMyPages(comicId: number): Observable<Array<Page>> {
+    return this.http
+      .get<Array<Page>>(`${environment.baseUrl}my/comics/${comicId}/pages`)
+      .catch((error: any) => Observable.throw(error || "Server error"));
+  }
+
+  getMyPage(comicId: number, pageId: number): Observable<Page> {
+    return this.http
+      .get<Page>(`${environment.baseUrl}my/comics/${comicId}/pages/${pageId}`)
       .catch((error: any) => Observable.throw(error || "Server error"));
   }
 }

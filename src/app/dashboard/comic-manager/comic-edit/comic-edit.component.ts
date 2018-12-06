@@ -89,7 +89,7 @@ export class ComicEditComponent implements OnInit {
       name: comic.name,
       description: comic.description,
       isPublic: comic.is_public,
-      isCommentActive: comic.is_public
+      isCommentActive: comic.is_comments_active
     });
   }
 

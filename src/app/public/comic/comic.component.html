@@ -2,7 +2,7 @@
 <div mdcSubtitle1 *ngIf="comic" class="comic-subtitle">criado por {{comic.author}}</div>
 <div class="wrapper" *ngIf="comic">
   <div class="comic-card-img">
-    <img *ngIf="selectedPage" [src]="selectedPage?.url ? selectedPage?.url : pageSample" alt="Smiley face">
+    <img *ngIf="selectedPage" [src]="selectedPage?.url ? selectedPage?.url : pageSample">
     <div *ngIf="comic && !selectedPage">
       <div class="page-not-found-card__primary">
         <h1 class="page-not-found-card__title" mdcHeadline1>Comic sem páginas</h1>
@@ -26,7 +26,7 @@
       </button>
     </div>
   </div>
-  <mdc-card *ngIf="comic" class="comic-card">
+  <mdc-card *ngIf="comic && comic.is_comments_active" class="comic-card">
     <mdc-ripple class="comic-card-comments">
       <h2 class="comic-card-article__title" mdcHeadline5>Comentários</h2>
       <div class="comment-input">

@@ -50,7 +50,7 @@ export class PageListComponent implements OnInit {
   }
 
   reloadComicPages() {
-    this.pageService.getPages(this.comic.id).subscribe(pages => {
+    this.pageService.getMyPages(this.comic.id).subscribe(pages => {
       this.pageList = pages.sort((x,y) => x.number - y.number)
     }, error => console.log(error))
   }

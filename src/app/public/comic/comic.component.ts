@@ -50,32 +50,29 @@ export class ComicComponent implements OnInit {
   ngOnInit() {
 
     this.user = this.accountService.getLocalUser();
-    
+
     this.comicService.getComic(this.comicId).mergeMap(comic => {
-      if(!comic)
+      if (!comic)
         this.router.navigateByUrl(``)
       this.comic = comic
       if (comic.pages.length > 0) {
-        this.pagesList = this.comic.pages.sort((a: any, b: any) => a.number - b.number );
+        this.pagesList = this.comic.pages.sort((a: any, b: any) => a.number - b.number);
         let localPage = this.pageService.getLastPageViewd(this.comicId)
         let selectableLocalPage = null
-        if(localPage)
+        if (localPage)
           selectableLocalPage = this.comic.pages.find(p => p.id == localPage.last_page_view)
-          if(selectableLocalPage)
-            this.selectedPage = selectableLocalPage
+        if (selectableLocalPage)
+          this.selectedPage = selectableLocalPage
         else
           this.selectedPage = this.comic.pages[this.comic.pages.length - 1];
         this.reloadComments()
         this.pageControl.setValue(this.selectedPage.title)
       }
-
-      return this.comicService.isFavorite(this.comicId)
-    }).mergeMap(isFavorite => {
-      this.isFavorite = isFavorite
+      this.getFavorite();
       return this.subscriberService.getSubscribers(this.comicId)
     }).subscribe(subscribers => {
       let sub = subscribers.find(x => x.user_id == this.user.id)
-      if(sub)
+      if (sub)
         this.isBlocked = sub.is_blocked;
     }, error => this.router.navigateByUrl(``))
   }
@@ -146,5 +143,13 @@ export class ComicComponent implements OnInit {
         new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
       );
     })
+  }
+
+  getFavorite() {
+    if (this.user) {
+      this.comicService.isFavorite(this.comicId).subscribe(isFavorite => {
+        this.isFavorite = isFavorite
+      })
+    }
   }
 }

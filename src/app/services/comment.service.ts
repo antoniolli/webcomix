@@ -53,9 +53,19 @@ export class CommentService {
         .catch((error: any) => Observable.throw(error || "Server error"));
     }
 
-    updateComment(message: string, commentId: number, comicId: number, pageId: number) {
+    authorDeleteComment(commentId: number, comicId: number, pageId: number) {
         return this.http
-        .put<Comment>(`${environment.baseUrl}comics/${comicId}/pages/${pageId}/comments/${commentId}`, message)
+        .delete<Comment>(`${environment.baseUrl}my/comics/${comicId}/pages/${pageId}/comments/${commentId}`)
+        .catch((error: any) => Observable.throw(error || "Server error"));
+    }
+
+    updateComment(message: string, commentId: number, comicId: number, pageId: number) {
+        const formData = new FormData();
+
+        formData.append('message', message);
+
+        return this.http
+        .put<Comment>(`${environment.baseUrl}comics/${comicId}/pages/${pageId}/comments/${commentId}`, formData)
         .catch((error: any) => Observable.throw(error || "Server error"));
     }
 }

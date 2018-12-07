@@ -9,6 +9,7 @@ import { CommentService } from 'src/app/services/comment.service';
 import { User } from '../../models/user';
 import { AccountService } from '../../services/account.service';
 import { SubscriberService } from '../../services/subscriber.service';
+import { PageService } from '../../services/page.service';
 
 @Component({
   selector: 'app-comic',
@@ -21,6 +22,7 @@ export class ComicComponent implements OnInit {
   comicId: number;
   comic: Comic;
   selectedPage: Page;
+  pagesList: Array<Page> = []
   comments: Array<Comment>;
   editableComment: Comment;
   isFavorite: boolean = false;
@@ -35,6 +37,7 @@ export class ComicComponent implements OnInit {
 
   constructor(
     private comicService: ComicService,
+    private pageService: PageService,
     private commentService: CommentService,
     private accountService: AccountService,
     private subscriberService: SubscriberService,
@@ -53,7 +56,15 @@ export class ComicComponent implements OnInit {
         this.router.navigateByUrl(``)
       this.comic = comic
       if (comic.pages.length > 0) {
-        this.selectedPage = this.comic.pages[this.comic.pages.length - 1];
+        this.pagesList = this.comic.pages.sort((a: any, b: any) => a.number - b.number );
+        let localPage = this.pageService.getLastPageViewd(this.comicId)
+        let selectableLocalPage = null
+        if(localPage)
+          selectableLocalPage = this.comic.pages.find(p => p.id == localPage.last_page_view)
+          if(selectableLocalPage)
+            this.selectedPage = selectableLocalPage
+        else
+          this.selectedPage = this.comic.pages[this.comic.pages.length - 1];
         this.reloadComments()
         this.pageControl.setValue(this.selectedPage.title)
       }
@@ -66,14 +77,14 @@ export class ComicComponent implements OnInit {
       let sub = subscribers.find(x => x.user_id == this.user.id)
       if(sub)
         this.isBlocked = sub.is_blocked;
-    })
-      , error => console.log(error)
+    }, error => this.router.navigateByUrl(``))
   }
 
   onSelectedPageChange(index: number) {
     if (this.comic.pages.length > 0) {
       this.selectedPage = this.comic.pages[index];
       this.pageControl.setValue(this.selectedPage.title);
+      this.pageService.setLastPageViewd(this.comicId, this.selectedPage.id)
       this.reloadComments()
     }
   }

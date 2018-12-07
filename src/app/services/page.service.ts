@@ -80,4 +80,13 @@ export class PageService {
       .get<Page>(`${environment.baseUrl}my/comics/${comicId}/pages/${pageId}`)
       .catch((error: any) => Observable.throw(error || "Server error"));
   }
+
+  getLastPageViewd(comicId: number) {
+    return JSON.parse(localStorage.getItem(`comic_${comicId}`));
+  }
+
+  setLastPageViewd(comicId: number, pageId: number) {
+    localStorage.setItem(`comic_${comicId}`, JSON.stringify({last_page_view: pageId}));
+  }
+
 }

@@ -53,6 +53,9 @@ html, body {
     background-size: contain;
     margin-left: 1rem;
     cursor: pointer;
+    &::before{
+      background-image: url("../assets/avatar_white_sample.png")
+    }
   }
 }
 

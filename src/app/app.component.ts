@@ -18,16 +18,27 @@ export class AppComponent {
         private accountService: AccountService
     ) {
         this.user = this.accountService.getLocalUser();
+        if(this.user && this.user.url)
+            this.avatar = this.user.url
         this.accountService.isLoggedIn().subscribe(it => {
-            if (it)
+            if (it) {
                 this.user = this.accountService.getLocalUser()
-            else
+                if(this.user.url)
+                    this.avatar = this.user.url
+            }
+            else{
                 this.user = null;
+                this.avatar = null;
+            }
         })
     }
 
     goToHome() {
         this.router.navigateByUrl('')
+    }
+
+    updateUrl() {
+        this.avatar = this.avatarSample
     }
 
 }

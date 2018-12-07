@@ -100,16 +100,16 @@ export class AccountService {
         const formData = new FormData();
 
         formData.append('name', profileForm.name);
-        formData.append('description', profileForm.id);
+        formData.append('id', profileForm.id);
         if(image)
             formData.append('avatar', image);
         
         return this.http
-            .put<any>(`${environment.baseUrl}profile`, formData)
+            .put<any>(`${environment.baseUrl}my/profile`, formData)
             .map(response => {
                 // login successful if there's a jwt token in the response
-                if (response && response.auth_token && response.user) {
-                    localStorage.setItem('user', JSON.stringify(response.user));
+                if (response && response.name && response.email && response.id) {
+                    localStorage.setItem('user', JSON.stringify(response));
                     this.logger.next(true);
                 }
                 return response;

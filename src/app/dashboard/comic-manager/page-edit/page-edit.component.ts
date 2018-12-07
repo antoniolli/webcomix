@@ -87,7 +87,16 @@ export class PageEditComponent implements OnInit {
   }
 
   deleteComment(commentId: number) {
-    this.commentService.deleteComment(commentId, this.comic.id, this.pageId).subscribe(comments => {
+    this.commentService.authorDeleteComment(commentId, this.comic.id, this.pageId).subscribe(comments => {
+      this.reloadComments()
+    })
+  }
+
+  editComment(comment: any) {
+    let message = comment.value
+    comment.setValue(null)
+    this.commentService.updateComment(message, this.editableComment.id, this.comic.id, this.pageId).subscribe(comment => {
+      this.editableComment = null;
       this.reloadComments()
     })
   }

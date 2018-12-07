@@ -12,14 +12,14 @@
       </div>
     </div>
     <div class="comic-card-navigation">
-      <button mdc-icon-button icon="keyboard_arrow_left" (click)="goBack()" [disabled]="selectedPage == comic.pages[0]"></button>
+      <button mdc-icon-button icon="keyboard_arrow_left" (click)="goBack()" [disabled]="selectedPage == pagesList[0]"></button>
       <mdc-select placeholder="páginas" outlined [formControl]="pageControl" [disabled]="!selectedPage"
         (selectionChange)="onSelectedPageChange($event.index)">
-        <option *ngFor="let page of comic.pages" [ngValue]="page">
+        <option *ngFor="let page of pagesList" [ngValue]="page">
           {{page.title}}
         </option>
       </mdc-select>
-      <button mdc-icon-button icon="keyboard_arrow_right" (click)="goNext()" [disabled]="selectedPage == comic.pages[comic.pages.length -1]"></button>
+      <button mdc-icon-button icon="keyboard_arrow_right" (click)="goNext()" [disabled]="selectedPage == pagesList[pagesList.length -1]"></button>
       <button [on]="isFavorite" mdcIconButton #favoriteIcon (click)="markAsFavorite(favoriteIcon)" [disabled]="!user || isBlocked">
         <mdc-icon mdcIconOn class="favorite-icon">favorite</mdc-icon>
         <mdc-icon class="unfavorite-icon">favorite_border</mdc-icon>
@@ -46,12 +46,12 @@
       <div class="comment-body">
         <mdc-list #custom twoLine avatar class="demo-list--custom" interactive="false">
           <mdc-list-item *ngFor="let comment of comments">
-            <div class="avatar" *ngIf="!avatar" [ngStyle]="{'background-image': 'url('+ avatarSample + ')'}">
+            <div class="avatar" *ngIf="comment && !comment.url" [ngStyle]="{'background-image': 'url('+ avatarSample + ')'}">
             </div>
-            <div class="avatar" *ngIf="avatar" [ngStyle]="{'background-image': 'url('+ avatar + ')'}">
+            <div class="avatar" *ngIf="comment && comment.url" [ngStyle]="{'background-image': 'url('+ comment.url + ')'}">
             </div>
             <mdc-list-item-text secondaryText="por {{comment.name}}">{{comment.message}}</mdc-list-item-text>
-            <button *ngIf="user && user.id == comment.user_id" class="edit-comment-button"mdc-icon-button icon="create" (click)="editableComment = comment"></button>
+            <button *ngIf="user && user.id == comment.user_id && !isBlocked" class="edit-comment-button"mdc-icon-button icon="create" (click)="editableComment = comment"></button>
             <button *ngIf="user && user.id == comment.user_id" mdcListItemMeta mdc-icon-button icon="close" (click)="deleteComment(comment.id)"></button>
           </mdc-list-item>
         </mdc-list>

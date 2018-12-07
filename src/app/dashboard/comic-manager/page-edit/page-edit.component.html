@@ -66,9 +66,9 @@
         <div class="comment-body">
           <mdc-list #custom twoLine avatar class="demo-list--custom" interactive="false">
             <mdc-list-item *ngFor="let comment of comments">
-              <div class="avatar" *ngIf="!avatar" [ngStyle]="{'background-image': 'url('+ avatarSample + ')'}">
+              <div class="avatar" *ngIf="comment && !comment.url" [ngStyle]="{'background-image': 'url('+ avatarSample + ')'}">
               </div>
-              <div class="avatar" *ngIf="avatar" [ngStyle]="{'background-image': 'url('+ avatar + ')'}">
+              <div class="avatar" *ngIf="comment && comment.url" [ngStyle]="{'background-image': 'url('+ comment.url + ')'}">
               </div>
               <mdc-list-item-text secondaryText="por {{comment.name}}">{{comment.message}}</mdc-list-item-text>
               <button *ngIf="current_user && current_user.id == comment.user_id" class="edit-comment-button" mdc-icon-button icon="create"

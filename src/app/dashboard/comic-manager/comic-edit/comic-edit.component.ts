@@ -32,7 +32,7 @@ export class ComicEditComponent implements OnInit {
   });
 
   selectedFile: ImageSnippet;
-
+  responseError: boolean = false;
   constructor(
     private route: ActivatedRoute,
     private comicService: ComicService,
@@ -109,19 +109,20 @@ export class ComicEditComponent implements OnInit {
     if(this.selectedFile && this.selectedFile.pending) {
       this.comicService.updateComic(this.comicForm.value, this.selectedFile.file).subscribe(
         (res) => {
-          this.onSuccess();
+          this.responseError = false
           this.router.navigateByUrl(`dashboard/comics/${this.comic.id}`)
         },
         (err) => {
-          this.onError();
+          this.responseError = true
         })
     } else {
       this.comicService.updateComic(this.comicForm.value).subscribe(
         (res) => {
+          this.responseError = false
           this.router.navigateByUrl(`dashboard/comics/${this.comic.id}`)
         },
         (err) => {
-          this.onError();
+          this.responseError = true
         })
     }
   }

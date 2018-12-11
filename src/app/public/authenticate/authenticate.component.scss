@@ -66,3 +66,11 @@
   text-decoration: none;
   color: inherit;
 }
+
+.card-error {
+  color: #b00020;
+  text-align: center;
+  .error-text {
+    margin: 2rem;
+  }
+}

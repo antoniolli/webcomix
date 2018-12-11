@@ -9,4 +9,17 @@
         padding: 1rem;
         text-align: center;        
     }
+
+    .card-error-success {
+        
+        text-align: center;
+        .error-text {
+            color: #b00020;
+            margin: 2rem;
+        }
+        .success-text {
+            color: #b00020;
+            margin: 2rem;
+        }
+      }
 }

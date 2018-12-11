@@ -40,7 +40,7 @@ export class PageEditComponent implements OnInit {
   });
 
   selectedFile: ImageSnippet;
-
+  responseError: boolean = false;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -135,18 +135,20 @@ export class PageEditComponent implements OnInit {
     if (this.selectedFile && this.selectedFile.pending) {
       this.pageService.updatePage(this.pageForm.value, this.comic.id, this.selectedFile.file).subscribe(
         (res) => {
-          this.onSuccess();
+          this.responseError = false
           this.router.navigateByUrl(`dashboard/comics/${this.comic.id}`)
         },
         (err) => {
-          this.onError();
+          this.responseError = true
         })
     } else {
       this.pageService.updatePage(this.pageForm.value, this.comic.id).subscribe(
         (res) => {
+          this.responseError = false
           this.router.navigateByUrl(`dashboard/comics/${this.comic.id}`)
         },
         (err) => {
+          this.responseError = true
         })
     }
   }

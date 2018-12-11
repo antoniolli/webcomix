@@ -23,7 +23,7 @@ export class ComicCreateComponent implements OnInit {
   });
 
   selectedFile: ImageSnippet;
-
+  responseError: boolean = false;
   constructor(private router: Router, private comicService: ComicService) { }
 
   ngOnInit() { }
@@ -54,11 +54,11 @@ export class ComicCreateComponent implements OnInit {
   submitForm() {
     this.comicService.persistComic(this.comicForm.value, this.selectedFile.file).subscribe(
       (res) => {
-        this.onSuccess();
+        this.responseError = false
         this.router.navigateByUrl(`dashboard/comics/${res.id}`)
       },
       (err) => {
-        this.onError();
+        this.responseError = true
       })
   }
 

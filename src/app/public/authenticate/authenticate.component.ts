@@ -28,6 +28,7 @@ export class AuthenticateComponent implements OnInit {
       { value: '', disabled: false }, [Validators.required, Validators.minLength(6)]),
     passwordConfirmation: new FormControl('', [LoginValidators.matchOtherValidator('password')]),
   });
+  responseError: boolean = false;
 
   constructor(
     private accountService: AccountService,
@@ -53,19 +54,21 @@ export class AuthenticateComponent implements OnInit {
     switch (action) {
       case "login":
         this.accountService.login(this.loginForm.value).subscribe(user => {
+          this.responseError = false
           if (this.redirectUrl)
             this.router.navigateByUrl(this.redirectUrl)
           else
             this.router.navigateByUrl("dashboard")
-        })
+        }, error => this.responseError = true)
         break;
       case "signUp":
         this.accountService.persistUser(this.signUpForm.value).subscribe(user => {
+          this.responseError = false
           if (this.redirectUrl)
             this.router.navigateByUrl(this.redirectUrl)
           else
             this.router.navigateByUrl("dashboard")
-        })
+        }, error => this.responseError = true)
         break;
     }
 

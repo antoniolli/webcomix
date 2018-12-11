@@ -28,7 +28,7 @@ export class ProfileManagerComponent implements OnInit {
   });
 
   selectedFile: ImageSnippet;
-
+  responseError: boolean = false;
   constructor(
     private accountService: AccountService,
     private router: Router) {
@@ -73,19 +73,20 @@ export class ProfileManagerComponent implements OnInit {
     if(this.selectedFile && this.selectedFile.pending) {
       this.accountService.updateProfile(this.profileForm.value, this.selectedFile.file).subscribe(
         (user) => {
-          this.onSuccess();
+          this.responseError = false
           this.router.navigateByUrl(`dashboard/comics`)
         },
         (err) => {
-          this.onError();
+          this.responseError = true
         })
     } else {
       this.accountService.updateProfile(this.profileForm.value).subscribe(
         (user) => {
+          this.responseError = false
           this.router.navigateByUrl(`dashboard/comics`)
         },
         (err) => {
-          this.onError();
+          this.responseError = true
         })
     }
   }

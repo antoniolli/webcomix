@@ -19,13 +19,13 @@ export class PageCreateComponent implements OnInit {
     title: new FormControl(
       { value: '', disabled: false }, [Validators.required]),
     number: new FormControl(
-      { value: '', disabled: false }, [Validators.required]),
+      { value: '', disabled: false }),
     isPublic: new FormControl(
       { value: 'true', disabled: false }, [Validators.required])
   });
 
   selectedFile: ImageSnippet;
-
+  responseError: boolean = false;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -79,11 +79,11 @@ export class PageCreateComponent implements OnInit {
       })
       this.pageService.persistPage(this.pageForm.value, this.selectedFile.file, this.comic.id).subscribe(
         (res) => {
-          this.onSuccess();
+          this.responseError = false
           this.router.navigateByUrl(`dashboard/comics/${this.comic.id}`)
         },
         (err) => {
-          this.onError();
+          this.responseError = true
         })
     })
   }
